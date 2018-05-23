@@ -1,0 +1,48 @@
+<main [@resizeProfile]='state' >
+    <div class="banner">
+    <img src="{{band?.image}}" alt="{{band?.name}}">
+</div>
+  <div class="headWrap">
+    <div class="title">
+      <h1>{{ band?.name }}</h1>
+      <h2>{{band?.city}}. {{band?.genre}}</h2>
+    </div>
+    <div class="buttons">
+      <button *ngIf="authService.loggedIn()"  mat-raised-button (click)="toogleChatBox()">Message</button>
+      <button mat-raised-button="" id="rate" (click)="rate()">Rate
+        <div *ngIf="rateDropDown" class="dropDown">
+          <p>
+            1 2 3 45
+          </p>
+        </div>
+      </button>
+      <button *ngIf="showContent" (click)= "getEvents('')" mat-raised-button (click)="toggleContentGigs()">Gigs</button>
+      <button *ngIf="showGigs" mat-raised-button (click)="toggleContentGigs()">Profile</button>
+    </div>
+  </div>
+
+  <div *ngIf="showContent" class="content">
+    <article>
+      <p>{{ band?.description }}</p>
+    </article>
+    <aside>
+      <iframe *ngIf="isBand" style="border: 0; width: 350px; height: 470px;"
+              [src]="bandCampLink |safeUrl"
+              seamless><a href="http://streetpieces.bandcamp.com/album/everything-you-ever-wanted">Everything You Ever
+        Wanted by Street Pieces</a></iframe>
+
+      <img *ngIf="isVenue" src="../../assets/images/fakeMap.JPG">
+    </aside>
+  </div>
+
+  <ng-container *ngIf="showGigs">
+    <div class="event" *ngFor="let event of events">
+      <div class="title">
+        <h1>{{ event?.name }}</h1>
+        <h2>{{ event?.date}} | {{ event?.venueName}} | {{ event?.city}}</h2>
+      </div>
+      <button mat-raised-button (click)="buyTickets(event?._id)">Buy tickets {{event?.price|currency}}</button>
+    </div>
+  </ng-container>
+  <app-chat-box *ngIf=isChatBoxActive  ></app-chat-box>
+</main>

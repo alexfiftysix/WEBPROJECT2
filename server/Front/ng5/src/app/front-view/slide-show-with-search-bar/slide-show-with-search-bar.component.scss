@@ -1,0 +1,184 @@
+@import "../../../variables.scss";
+
+.slide-show {
+  z-index: 1;
+  overflow: hidden;
+  width: 100%;
+  height: 80vh;
+  .content {
+    z-index: 998;
+    position: absolute;
+    height: 300px;
+    bottom: 25%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .innerWrapper {
+      position: relative;
+      h1 {
+        width: 100%;
+        color: white;
+      }
+    }
+    .additionalInformationWrapper {
+      height: 200px;
+      background: white;
+      position: absolute;
+      width: 70vw;
+      .innerWrapper {
+        width: 40vw;
+        margin: 0 0 0 53px;
+        .myButton {
+          -moz-box-shadow: inset 0 1px 0 0 #ffffff;
+          -webkit-box-shadow: inset 0 1px 0 0 #ffffff;
+          box-shadow: inset 0 1px 0 0 #ffffff;
+          background-color: transparent;
+          -moz-border-radius: 6px;
+          -webkit-border-radius: 6px;
+          border-radius: 6px;
+          border: 1px solid #dcdcdc;
+          display: inline-block;
+          cursor: pointer;
+          color: #666666;
+          font-size: 2rem;
+          padding: 6px 24px;
+          text-decoration: none;
+          text-shadow: 0 1px 0 #ffffff;
+        }
+        .myButton:hover {
+          background-color: transparent;
+        }
+        .myButton:active {
+          position: relative;
+          top: 1px;
+        }
+        h3 {
+          font-weight: 700;
+          color: #484848;
+          font-size: 1rem;
+          line-height: calc(3vw + 7px);
+        }
+      }
+    }
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: calc(3vw + 7px);
+      min-width: 85%;
+      width: 85%;
+      text-shadow: 1px 1px 30px rgba(0, 0, 0, 0.6);
+    }
+    form {
+      min-width: 70vw;
+      width: 70vw;
+      background: white;
+      color: $color-accent;
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      -webkit-box-shadow: 1px 1px 40px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 1px 1px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 1px 1px 40px rgba(0, 0, 0, 0.4);
+      .search-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 80%;
+      }
+      .text-box {
+        background: white;
+        color: $color-light;
+        caret-color: $color-accent;
+        border: none;
+        font-size: 2em;
+        width: 93%;
+      }
+      .text-box::selection {
+        background: $color-accent;
+        color: #ffffff;
+      }
+      img {
+        width: 5%;
+      }
+      .btn {
+        background: $color-accent;
+        color: $color-light;
+        border: none;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 1.5em;
+        cursor: pointer;
+        outline: none;
+        width: 13%;
+      }
+      .btn::-moz-focus-inner {
+        // Gets rid of annoying Firefox shit
+        border: 0;
+      }
+      .btn:active {
+        background: #fff;
+        outline: none;
+      }
+      .btn:focus {
+        outline: 0;
+      }
+    }
+  }
+  .wrapper {
+    height: 100vh;
+    margin-bottom: 20px;
+    overflow: hidden;
+    animation: mymove 7s cubic-bezier(0, 1, 1, .87) infinite;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .overlayShadow {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background-color: #000;
+      animation: darken 7s cubic-bezier(0, 1, 1, .8) infinite;
+    }
+  }
+}
+
+@-webkit-keyframes mymove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10%);
+  }
+}
+
+@-webkit-keyframes darken {
+  0% {
+    opacity: 1;
+  }
+  26% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes darken {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

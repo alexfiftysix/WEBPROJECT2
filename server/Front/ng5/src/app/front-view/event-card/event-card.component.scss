@@ -1,0 +1,129 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../../../variables.scss";
+
+p{
+  display: block;
+  height: 1em;
+  color: black;
+}
+
+.suggestionsGallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: auto;
+  justify-items: center;
+  grid-gap: 1em;
+
+
+}
+.suggestionsBox {
+  min-width: 300px;
+  min-height: 300px;
+}
+
+// .eventImage {
+//   background-size: cover;
+//   background: no-repeat center;
+//   position: relative;
+//   min-width: 100%;
+//   min-height: 80%;
+//   width: 100%;
+//   height: 100%;
+// }
+
+img {
+  width: inherit;
+  height: inherit;
+}
+
+.hotItem {
+  position: absolute;
+  left: 3em;
+  top: 11em;
+  height: 30px;
+  width: 30px;
+  z-index: 1;
+  // border: 1px red solid;
+}
+
+.newItem {
+  position: absolute;
+  height: 5em;
+  width: 3em;
+  z-index: 2;
+  // border: 1px red solid;
+}
+
+.ratingItem {
+  padding:0;
+  margin-top:-1em;
+  align-content: center;
+  vertical-align: middle;
+ }
+
+.ratingImage:hover{
+  cursor: pointer;
+}
+.ratingImage,.ratingNumber {
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+.price {
+  font-weight: normal;
+  font-size: 0.8rem;
+}
+.venueName,.venueAddress{
+  display:inline-block;
+}
+.venueAddress,
+.venueName,.eventName{
+  font-weight: bold;
+  padding:0;
+  margin:0;
+}
+.contents{
+  margin-bottom:-2em !important;
+}
+mat-card img{
+  object-fit: cover !important; /*this makes de image in src fit to the size of specified below*/
+  width: 100% !important;
+  height: 50% !important;
+}
+
+// .mat-fab {
+//   background-color: #fc2840;
+//   -webkit-transition-duration: 0.4s; /* Safari */
+//   transition-duration: 0.4s;
+//   text-decoration: none;
+//   overflow: hidden;
+//   display: inline-block;
+//   position: absolute;
+//   width: 6em;
+//   height: 6em;
+//   left: 14em;
+//   bottom: 2em;
+
+// }
+
+// .mat-fab:after {
+//   content: "";
+//   background: white;
+//   display: block;
+//   position: absolute;
+//   border-radius: 50%;
+//   padding-top: 250%;
+//   padding-left: 200%;
+//   margin-left: -20px !important;
+//   margin-top: -200%;
+//   opacity: 0;
+//   transition: all 0.8s
+// }
+
+// .mat-fab:active:after {
+//   padding: 0;
+//   margin: 0;
+//   opacity: 1;
+//   transition: 0s
+// }

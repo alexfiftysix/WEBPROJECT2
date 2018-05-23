@@ -1,0 +1,60 @@
+<main>
+  <section class="formWindow">
+    <header>
+      <h1>Sign up {{accountType}} </h1>
+      <section class="x" (click)=closeSubmissionForm()></section>
+    </header>
+
+    <!-- front of the  Fan window -->
+    <div class="cards">
+      <div class="fanSection card">
+        <!-- card -->
+        <div id="fanCard" (click)="showRegistrationForm($event)"
+             class="card-front fanCard thumbnail">
+        </div>
+        <!-- /card -->
+        <aside>
+          <h2>Sign up as a fan</h2>
+          <p>Sign up as a fan to follow bands and venues, buy tickets and message others.</p>
+          <button id="fanButton" mat-raised-button (click)="showRegistrationForm($event)">Create fan account</button>
+        </aside>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="bandSection card">
+        <!-- card -->
+        <div id="bandCard" (click)="showRegistrationForm($event)"
+             class="card-front bandCard thumbnail">
+        </div>
+        <!-- /card -->
+        <aside>
+          <h2>Sign up as a band</h2>
+          <p>Bands can share music and images, create events and sell tickets.</p>
+          <button id="bandButton" mat-raised-button (click)="showRegistrationForm($event)">Create band account</button>
+        </aside>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="venueManagerSection card">
+        <!-- card -->
+        <div id="venueCard" (click)="showRegistrationForm($event)"
+             class="card-front venueCard thumbnail">
+        </div>
+        <!-- /card -->
+        <aside>
+          <h2>Sign up as a venue</h2>
+          <p>Venues can share photos and other info, host events and sell tickets.</p>
+          <button id="venueButton" mat-raised-button (click)="showRegistrationForm($event)">Create venue account</button>
+        </aside>
+      </div>
+    </div>
+
+    <footer>
+      <p> Already have a BANDZ account? <a (click)="redirecttoLogin()" href="#">Log in </a> </p>
+    </footer>
+
+  </section>
+</main>

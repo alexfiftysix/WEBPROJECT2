@@ -1,0 +1,87 @@
+@import "../../variables.scss";
+
+footer{
+  min-width: 100%;
+  background-color: $color-accent;
+  display: flex;
+  justify-content: space-between;
+  padding: 3em;
+  overflow: hidden;
+  z-index: 2;
+  position: fixed;
+  bottom:0;
+  height: 10vh;
+  border-top: 2px solid $color-accent-dark;
+}
+
+.fake-footer{
+  // Ensures the bottom of the screen is free for the footer.
+  height: 4em ;
+}
+
+.social{
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: relative;
+  bottom: 1em;
+  right: 3em;
+
+  a{
+    width: inherit;
+    height: inherit;
+  img{
+    width: inherit;
+    height: inherit;
+    display: inline-block;
+    cursor: pointer;
+  }
+}
+}
+p{
+  color: white;
+}
+@import "~variables.scss";
+
+ul{
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+  color: #fff;
+  font-size: 1.2em;
+  li:not(:first-child):not(:nth-child(1)){
+    padding: .5em 2em;
+    .blacks{
+      background-color: green;
+    }
+    a{
+      position: relative;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    a::before{
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -1em;
+      left: 0;
+      background-color: white;
+      visibility: hidden;
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+      -webkit-transition: all 0.3s ease-in-out 0s;
+      transition: all 0.3s ease-in-out 0s;
+    }
+    a:hover:before{
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    }
+  }
+
+}
+

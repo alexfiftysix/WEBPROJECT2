@@ -1,0 +1,65 @@
+<div class="wrapper">
+  <div class="logInWindow">
+    <div class="title">
+      <h1>Register yourself as a {{accountType | uppercase}}</h1>
+      <div (click)=closeSecondSubmissionForm() class="x"></div>
+    </div>
+    <div class="Container">
+      <form action="" method="post" class="form form-login" [formGroup]="registrationForm" (ngSubmit)="send()">
+        <mat-form-field floatLabel>
+          <mat-label>
+            <mat-icon>email</mat-icon>
+            Email
+          </mat-label>
+          <input #email type="email" [(ngModel)]="account.username" matInput placeholder="Please provide your email address" formControlName="email">
+          <mat-error *ngIf="hasError('email', 'required')">
+            <mat-icon>cancel</mat-icon>
+            Email address required
+          </mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">
+            <mat-icon>cancel</mat-icon>
+            Email is not valid
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field floatLabel>
+          <mat-label>
+            <mat-icon>lock-outline</mat-icon>
+            Password
+          </mat-label>
+          <input value="warn" [(ngModel)]="account.password" #password type="password"
+                 matInput placeholder="Please provide your password" formControlName="password">
+          <mat-error *ngIf="hasError('password', 'required')">
+            <mat-icon>cancel</mat-icon>
+            Password required
+          </mat-error>
+          <mat-hint *ngIf="!registrationForm.valid && !password.value"> Password needs to have at least 8 characters,
+            contain a number, special symbol and letter
+          </mat-hint>
+          <mat-error *ngIf="hasError('password', 'minlength')">
+            <mat-icon>cancel</mat-icon>
+            At least 8 characters
+          </mat-error>
+          <mat-error *ngIf="hasError('password', 'pattern')">
+            <mat-icon>cancel</mat-icon>
+            Contains a number, special symbol and letter
+          </mat-error>
+          <mat-error *ngIf="passwordMatchesEmail(email.value,password.value)">
+            <mat-icon>cancel</mat-icon>
+            Cannot contain your email adress
+          </mat-error>
+        </mat-form-field>
+        <div class="passwordMeterContainer" *ngIf="true">
+          <p><i class="material-icons">vpn_key</i> Password Strength</p>
+          <ng2-password-strength-bar [passwordToCheck]="account.password" [barColors]="myColors">
+          </ng2-password-strength-bar>
+        </div>
+        <button class="submit" type="submit" mat-raised-button
+                [disabled]="!registrationForm.valid && !isPasswordStrong.value">Sign in
+        </button>
+        <p> Already have a BANDZ account?
+          <a (click)="redirecttoLogin()" href="#">Log in </a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

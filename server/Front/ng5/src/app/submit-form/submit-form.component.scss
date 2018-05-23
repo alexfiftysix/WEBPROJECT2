@@ -1,0 +1,161 @@
+/** A wrapper that covers whole body and add overlay */
+@import "../../variables.scss";
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($color: #000, $alpha: 0.8);
+  position: fixed;
+  z-index: 999;
+
+  .formWindow {
+    overflow: hidden;
+    background: $color-lighter;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-radius: 5px;
+
+    transition: 2s;
+    width: 60vw;
+    max-width: 700px;
+    position: relative;
+
+    footer{
+      background: $color-accent;
+      color: $color-lighter ;
+      display: flex;
+      justify-content: center;
+      a{
+        font-weight: bolder;
+      }
+    }
+
+    .divider {
+      width: 90%;
+      border-top: 1px solid $color-darker;
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      background: $color-accent;
+
+      h1 {
+        text-align: center;
+        color: $color-lighter;
+      }
+    }
+
+    .cards {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      width: 100%;
+      margin: 0;
+
+      .card {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        position: relative;
+        height: 150px;
+        margin: 15px;
+
+        aside {
+          width: 50%;
+          h2{
+            margin: 0;
+          }
+          button{
+            background: $color-accent;
+            color: $color-lighter;
+          }
+        }
+
+        .thumbnail {
+          height: 150px;
+          width: 150px;
+          box-shadow: 2px 2px $color-darker;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .fanCard {
+          background: url("../../assets/images/fan-fromTheInternet.png") no-repeat;
+          background-size: cover;
+        }
+        .bandCard {
+          background: url("../../assets/images/band-fromTheInternet.png") no-repeat;
+          background-size: cover;
+        }
+        .venueCard {
+          background: url("../../assets/images/venue-manager_fromTheInternet") no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+  }
+}
+
+/*-------- cards --------*/
+
+
+
+/*!!-------- cards --------*/
+/* CLOSE BUTTON STYLING */
+.x {
+  display: block;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  width: 32px;
+  height: 32px;
+  transition: transform .4s ease-in-out;
+}
+
+.x:hover {
+  transform: rotate(180deg);
+}
+
+.x:before {
+  content: "";
+  position: absolute;
+  display: block;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  height: 0;
+  border-top: 1px solid white;
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+.x:after {
+
+  content: "";
+  position: absolute;
+  display: block;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  height: 0;
+  border-top: 1px solid white;
+  transform: rotate(-45deg);
+  transform-origin: center;
+}
+
+/* !CLOSE X STYLING */
+/*SUBMIT WINDOW EFFECTS */

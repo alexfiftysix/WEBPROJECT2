@@ -1,0 +1,17 @@
+<h2>
+  Great local {{ contentType }}s
+</h2>
+<p>
+  <a *ngIf="startingFrom != 0" (click)="downByx(5)"><strong><<</strong></a>
+  <a *ngIf="startingFrom != 0" (click)="downByx(1)"><strong><</strong></a>
+  <a *ngIf="startingFrom != cards.length-cardsShown" (click)="upByx(1)"><strong>></strong></a>
+  <a *ngIf="startingFrom != cards.length-cardsShown" (click)="upByx(5)"><strong>>></strong></a>
+</p>
+
+<div class="card-deck" onresize="calculateCardAmount()">
+  <div class="card" *ngFor="let card of current">
+    <img src="{{card['thumbnail']}}">
+    <h3>{{card['name']}}</h3>
+    <p>{{card['description']}}</p>
+  </div>
+</div>

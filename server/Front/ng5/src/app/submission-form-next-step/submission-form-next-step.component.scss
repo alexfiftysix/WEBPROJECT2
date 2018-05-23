@@ -1,0 +1,195 @@
+@import url('https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css');
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($color: #000000, $alpha: 0.8);
+  position: fixed;
+  z-index: 999;
+  .logInWindow {
+    position: relative;
+    padding: 10px 5%;
+    background: #fc2840;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    .title {
+      h1 {
+        //hack to position text vertically
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        // font-size: 2em;
+      }
+    }
+    .Container {
+      width: 100%;
+      height: 100%;
+      color: white;
+      box-sizing: border-box;
+      form {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        mat-form-field {
+          mat-label {
+            color: white;
+
+          }
+          input {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+a {
+  font-size: 1.2em;
+}
+
+#lostPassword {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#registerAccount {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.submit {
+  background: white;
+  color: #fc2840;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 1.5em;
+  cursor: pointer;
+  outline: none;
+
+}
+
+/** CLOSE BUTTON STYLING **/
+.x {
+  display: block;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  width: 32px;
+  height: 32px;
+  transition: transform .25s ease-in-out;
+}
+
+.x:hover {
+  transform: rotate(180deg);
+}
+
+.x:before {
+  content: "";
+  position: absolute;
+  display: block;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  height: 0;
+  border-top: 1px solid white;
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+.x:after {
+
+  content: "";
+  position: absolute;
+  display: block;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  height: 0;
+  border-top: 1px solid white;
+  transform: rotate(-45deg);
+  transform-origin: center;
+}
+
+/** !CLOSE X STYLING **/
+// mat-error{
+//   color: white !important;
+// }
+.has-danger {
+  border: 1px solid black !important;
+}
+
+.has-success {
+  border-color: green !important;
+}
+
+////FORMS STYLING
+//overriding color for inputs
+mat-error {
+  color: black !important;
+}
+
+/deep/ .mat-focused .mat-form-field-ripple {
+  background-color: white !important;
+}
+
+/deep/ .mat-focused .mat-form-field-ripple {
+  background-color: white !important;
+}
+
+/deep/ .mat-form-field-invalid .mat-form-field-ripple {
+  background-color: black;
+}
+
+// !overriding color for inputs
+/deep/ .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+/deep/ .mat-form-field:nth-of-type(1) {
+  padding-bottom: 1.25em !important;
+}
+
+.passwordMeterContainer {
+  padding-bottom: 1.25em;
+}
+
+span {
+  font-size: 20px;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+p > i {
+  vertical-align: middle !important;
+}
+
+// .passwordMeterIcon{
+//   font-size: 0 !important;
+// }
+/deep/ #strengthBar {
+  margin-left: 0 !important;
+}
+

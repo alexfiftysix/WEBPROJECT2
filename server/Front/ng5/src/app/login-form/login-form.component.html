@@ -1,0 +1,57 @@
+<div class="wrapper">
+  <div class="logInWindow">
+    <div class="title">
+      <h1>{{title}}</h1>
+      <div class="x" (click)=closeLoginForm()></div>
+    </div>
+    <div class="Container">
+      <form  *ngIf=activeResetComponent action="" method="post" [formGroup]="loginForm" class="form form-login">
+        <mat-form-field *ngIf=activeResetComponent >
+          <mat-label>
+            <mat-icon>email</mat-icon>
+            Username
+          </mat-label>
+          <input type="text" matInput placeholder="Please provide your username" formControlName="username">
+        </mat-form-field>
+        <mat-form-field *ngIf=activeResetComponent>
+          <mat-label>
+            <mat-icon>lock-outline</mat-icon>
+            Password
+          </mat-label>
+          <input  type="password" matInput placeholder="Please provide your password" formControlName="password">
+        </mat-form-field>
+        <button *ngIf=activeResetComponent [disabled]="!loginForm.valid" (click)="onLoginSubmit()" mat-raised-button>Log in</button>
+        <a *ngIf=activeResetComponent id="lostPassword" (click)="redirectToResetPass()" href="#">Lost your password?</a>
+        <br>
+        <a *ngIf=activeResetComponent id="registerAccount" (click)="redirecttoSubmit()" href="#">Don't have an account?</a>
+      </form>
+      <!-- RESET FORM <!-->
+         <form  *ngIf=!activeResetComponent action="" method="post" [formGroup]="resetForm" class="form form-login">
+        <mat-form-field *ngIf=!activeResetComponent >
+          <mat-label>
+            <mat-icon>email</mat-icon>
+            Username
+          </mat-label>
+          <input type="text" matInput placeholder="Please provide your username" formControlName="email">
+          <mat-error *ngIf="resetForm?.get('email')?.errors?.email">
+            <mat-icon>cancel</mat-icon>
+           Provide a valid email
+          </mat-error>
+          <mat-error *ngIf="resetForm?.get('email')?.errors?.doesNotExist">
+            <mat-icon>cancel</mat-icon>
+            Email is not found
+          </mat-error>
+          <mat-hint *ngIf="resetForm.get('email').status === 'VALID'">
+            <mat-icon>check_circle</mat-icon>
+            Email found, you can reset your password
+          </mat-hint>
+          <mat-hint class='pending' *ngIf="resetForm.get('email').status === 'PENDING'">
+          looking for username...
+          </mat-hint>
+        </mat-form-field>
+        <button *ngIf=!activeResetComponent [disabled]="!resetForm.valid" (click)="sendNewPassword(resetForm.get('email').value)" mat-raised-button>Reset password</button>
+      </form>
+       <!-- RESET FORM <!-->
+    </div>
+  </div>
+</div>

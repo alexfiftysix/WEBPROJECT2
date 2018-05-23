@@ -1,0 +1,73 @@
+
+<div class="wrapper">
+  <div class="content">
+    <div class="innerWrapper">
+      <form>
+        <div class="searchWrapper">
+          <img src="../../assets/images/search.svg">
+          <input [(ngModel)]="searchQuery" name = "searchInput" (focus)="changeActive()" class="text-box" title='search' type="text" placeholder="Search bands or events">
+        </div>
+      </form>
+      <div class="additionalInformationWrapper" [style.display]="isActive() ? 'block': 'none'">
+        <div class="innerWrapper">
+          <h3 class="title">
+            Explore
+            <b>BANDS</b>
+          </h3>
+          <button (click)="getAll(searchQuery)" class="myButton">All</button>
+          <button (click)="getBands(searchQuery)" class="myButton">Bands</button>
+          <button (click)="getEvents(searchQuery)" class="myButton">Events</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="filterContainer">
+    <div class="filterWrapper">
+        <div>
+       <button class="filterButton" (click)="openDatePicker()" mat-button>Date </button>
+         <input name="input" [matDatepicker]="picker"  [(ngModel)]="dateInput" [style.visibility]="isButtonChangePickerActive ? 'visible': 'hidden'">
+       </div>
+       <div>
+      <button class="filterButton" (click)="openValueSlider()" mat-button>Price</button>
+          <p-slider [style.visibility]="isValueSliderActive ? 'visible': 'hidden'" [animate]="true"
+           [(ngModel)]="rangeValues" [style]="{'width':'200px'}" [range]="true">
+          </p-slider>
+         <h3 [style.visibility]="isValueSliderActive ? 'visible': 'hidden'">
+          Range: {{rangeValues[0] + ' - ' + rangeValues[1]}}</h3>
+         </div>
+     <mat-datepicker #picker></mat-datepicker>
+    </div>
+  </section>
+  <section class=contentWrapper>
+  <section class="searchResultsContainer" [@listAnimation]='events?.length'  [@listAnimation]='bands?.length'>
+    <div *ngIf="searching">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <h2 class="paragraph">Book and experience great events </h2>
+    <app-event-card (click)="redirectToEventProfile(event._id)" (mouseenter)="event.hovered = true" (mouseleave)="event.hovered = false"
+    *ngFor="let event of events | EventSearchFilter: dateInput : rangeValues " [event]="event"></app-event-card>
+    <h2 class= "paragraph">Discover best bands accross Australia</h2>
+    <app-band-card (click)="redirectToBandProfile(band._id)" (mouseenter)="band.hovered = true" (mouseleave)="band.hovered = false"
+      [band]="band" *ngFor="let band of bands"></app-band-card>
+  </section>
+  <aside class="mapContainer"[class.fixed]="fixed">
+      <agm-map (mapReady)="onMapReady($event)"
+        [zoom]=8
+        [minZoom]=2
+        [maxZoom]=11
+        [class.fixed]="fixed"  [latitude]= "latitude"  [longitude]="longitude" >
+        <agm-marker *ngFor="let event of events | EventSearchFilter: dateInput : rangeValues; let i = index"
+        [latitude]= "event.location.coordinates[0]"
+        [longitude]="event.location.coordinates[1]"
+        [iconUrl]=""
+        [label]="{
+          color: (event.hovered) ? 'black' : 'white',
+          background: 'white',
+          fontWeight: 'bold',
+          text:'$' +  (event.price).toString()
+      }">
+      </agm-marker>
+      </agm-map>
+  </aside>
+</section>
+</div>

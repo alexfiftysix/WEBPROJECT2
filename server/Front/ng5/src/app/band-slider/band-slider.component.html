@@ -1,0 +1,20 @@
+<h2>
+  Great local {{ contentType }}s
+</h2>
+<p>
+  <!--<a *ngIf="startingFrom != 0" (click)="downByx(5)"><strong><<</strong></a>-->
+  <!--<a *ngIf="startingFrom != 0" (click)="downByx(1)"><strong><</strong></a>-->
+  <!--<a *ngIf="startingFrom != cards.length-cardsPerRow*amountOfRows" (click)="upByx(1)"><strong>></strong></a>-->
+  <!--<a *ngIf="startingFrom != cards.length-cardsPerRow*amountOfRows" (click)="upByx(5)"><strong>>></strong></a>-->
+</p>
+<div class="card-deck">
+  <div class="card" *ngFor="let card of cardsDisplayed">
+    <img *ngIf="card['thumbnail'] !== ''" src="{{card['thumbnail']}}">
+    <section *ngIf="card['name'] !== ''">
+      <h3>{{card['name']}}</h3>
+      <p>{{card['description']}}</p>
+    </section>
+  </div>
+</div>
+
+<a *ngIf="rowsDrawn * cardsPerRow < cards.length" (click)="drawNextRow()"><strong>Show more...</strong></a>
