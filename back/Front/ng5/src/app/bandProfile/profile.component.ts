@@ -1,11 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AuthService} from '../../services/auth.service';
-import { EventsDataService} from '../../app/front-view/suggestions/events.service';
+import {Component, OnInit, Inject} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
+import {EventsDataService} from '../front-view/suggestions/events.service';
 import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
-import { BandsDataService } from '../front-view/suggestions/bands.service';
-import {ChatBoxComponent} from '../bandProfile/chat-box.component';
+import {BandsDataService} from '../front-view/suggestions/bands.service';
+import {ChatBoxComponent} from './chat-box.component';
 import {trigger, state, style, transition, animate, keyframes} from '@angular/animations';
 import {Http, Response} from '@angular/http';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+
+import {DialogTestComponent} from '../dialog-test/dialog-test.component';
+import {CreateNewBandComponent} from '../create-new-band/create-new-band.component';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -18,7 +23,6 @@ import {Http, Response} from '@angular/http';
       state('smaller', style({
         width: '60vw'
       })),
-
       transition('normal <=> smaller', animate('300ms ease-in'))
     ]),
   ]
@@ -36,8 +40,21 @@ export class BandProfileComponent implements OnInit {
   showGigs = false;
   isChatBoxActive = false;
   state = 'normal';
+
+  constructor(
+    private bandService: BandsDataService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    public authService: AuthService,
+    private eventService: EventsDataService,
+    private http: Http,
+    public dialog: MatDialog
+    // @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+  }
+
   toogleChatBox() {
-    this.state = (this.state === 'normal' ? 'smaller' : 'normal' );
+    this.state = (this.state === 'normal' ? 'smaller' : 'normal');
     if (this.isChatBoxActive) {
       setTimeout(() => {
         this.isChatBoxActive = !this.isChatBoxActive;
@@ -47,74 +64,69 @@ export class BandProfileComponent implements OnInit {
     }
 
   }
+
   rate() {
     // console.log('Rate');
     this.rateDropDown = !this.rateDropDown;
   }
 
-  constructor(private bandService: BandsDataService,
-      private activedRoute: ActivatedRoute,
-      private router: Router,
-      public authService: AuthService,
-      private eventService: EventsDataService,
-      private http: Http
-    ) {
-  }
-
   public ngOnInit() {
-    const bandId = this.activedRoute.snapshot.params['bandId'];
+    const bandId = this.activatedRoute.snapshot.params['bandId'];
     this.getBand(bandId);
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
-          return;
+        return;
       }
       window.scrollTo(0, 0);
-  });
-}
-getEvents(query: string) {
-  this.searching = true;
-  return this.eventService.getEvents(query).subscribe(data => {
-    this.events = data.events;
-    console.log( this.events);
-}, error => console.log(error),
-() => {
-  console.log('Events fetched completed');
-});
-}
+    });
+  }
 
-sendPayment(eventId) {
-  console.log(eventId);
-  return this.http.post('http://52.40.161.160:3000/pay/' + eventId, '')
-    .map(res => res.json());
+  getEvents(query: string) {
+    this.searching = true;
+    return this.eventService.getEvents(query).subscribe(data => {
+        this.events = data.events;
+        console.log(this.events);
+      }, error => console.log(error),
+      () => {
+        console.log('Events fetched completed');
+      });
+  }
+
+  sendPayment(eventId) {
+    console.log(eventId);
+    return this.http.post('http://52.40.161.160:3000/pay/' + eventId, '')
+      .map(res => res.json());
   }
 
   buyTickets(eventId) {
-  this.sendPayment(eventId).subscribe((payment) => {
-   for (let i = 0; i < payment.links.length; i++) {
-                if (payment.links[i].rel === 'approval_url') {
-                  console.log(payment.links[i].href);
-                  window.location.href = payment.links[i].href;
-                }
-            }
-   });
+    this.sendPayment(eventId).subscribe((payment) => {
+      for (let i = 0; i < payment.links.length; i++) {
+        if (payment.links[i].rel === 'approval_url') {
+          console.log(payment.links[i].href);
+          window.location.href = payment.links[i].href;
+        }
+      }
+    });
   }
-getBand(bandId) {
-  this.bandService.getBandbyId(bandId).subscribe(data => {
-    this.band =  data;
-}, error => console.log(error),
-() => {
-  this.searching = false;
-  console.log('Band' + bandId +  ' fetched completed');
-}
-);
 
-}
+  getBand(bandId) {
+    this.bandService.getBandbyId(bandId).subscribe(data => {
+        this.band = data;
+      }, error => console.log(error),
+      () => {
+        this.searching = false;
+        console.log('Band' + bandId + ' fetched completed');
+      }
+    );
 
-toggleContentGigs() {
-  this.showContent = !this.showContent;
-  this.showGigs = !this.showGigs;
-}
+  }
 
+  toggleContentGigs() {
+    this.showContent = !this.showContent;
+    this.showGigs = !this.showGigs;
+  }
 
-
+  createNew() {
+    const dialogRef = this.dialog.open(CreateNewBandComponent);
+  }
 }

@@ -1,0 +1,41 @@
+@import "../../variables.scss";
+
+
+main{
+  background: $color-lighter;
+  color: $color-darker;
+  border-radius: 5px;
+  min-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+
+  mat-dialog-actions{
+    display: flex;
+    flex-direction: column;
+    textarea{
+      height: 200px;
+    }
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  h1{
+    color: $color-accent;
+  }
+
+  button{
+    background-color: $color-accent;
+    color: $color-lighter;
+  }
+
+
+  footer{
+    background: $color-accent;
+    color: white;
+    padding: 20px
+  }
+}
