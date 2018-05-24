@@ -2,7 +2,7 @@ const express =  require('express');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const config = require('../config/database')
+const config = require('../config/database');
 const Event = require('../models/event');
 const mongoose = require('mongoose');
 const eventController = require('../controllers/event');
@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
     filename: function(req,file,callback){
         callback(null,new Date().toDateString()+file.originalname)
     }
-})
+});
 
 //fileValidation  for Images
 const fileFilter = (req,file,callback) =>{
@@ -26,7 +26,7 @@ const fileFilter = (req,file,callback) =>{
     } else{
         callback(null,false);
     }
-}
+};
 
 const upload = multer({
     storage: storage,
@@ -50,4 +50,4 @@ router.delete('/:EventId', eventController.deleteOneEvent);
 
 router.patch('/:EventId', eventController.modifyOneEvent);
 
-module.exports = router
+module.exports = router;

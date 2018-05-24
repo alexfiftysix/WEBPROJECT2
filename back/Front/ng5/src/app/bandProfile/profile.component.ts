@@ -8,7 +8,6 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/an
 import {Http, Response} from '@angular/http';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 
-import {DialogTestComponent} from '../dialog-test/dialog-test.component';
 import {CreateNewBandComponent} from '../create-new-band/create-new-band.component';
 import {ProfileDoesNotExistComponent} from "../profile-does-not-exist/profile-does-not-exist.component";
 import {ProfileDeleteComponent} from "../profile-delete/profile-delete.component";
@@ -45,6 +44,7 @@ export class BandProfileComponent implements OnInit {
   state = 'normal';
   image: string;
   spotifyPlayerLink = 'https://open.spotify.com/embed?uri=spotify:artist:36QJpDe2go2KgaRleHCDTp';
+  gigs = {};
 
   constructor(
     private bandService: BandsDataService,
@@ -62,6 +62,7 @@ export class BandProfileComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.bandId = this.activatedRoute.snapshot.params['bandId'];
       this.getBand(this.bandId);
+      this.getEvents('');
       this.router.events.subscribe((evt) => {
         if (!(evt instanceof NavigationEnd)) {
           return;
@@ -72,7 +73,29 @@ export class BandProfileComponent implements OnInit {
 
   }
 
-  toogleChatBox() {
+  getEvents(query: string) {
+    this.searching = true;
+    let allEvents;
+    return this.eventService.getEvents(query).subscribe(data => {
+        allEvents = data.events;
+        console.log(data);
+      }, error => console.log(error),
+      () => {
+        this.searching = false;
+        console.log('Events fetched completed');
+        allEvents.forEach(event => {
+          console.log(event);
+          console.log(event['_id']);
+          console.log(event['headlinerId']);
+          if (event['headlinerId'] == this.bandId){
+            this.events.push(event);
+          }
+        });
+        console.log(this.events);
+      });
+  }
+
+  toggleChatBox() {
     this.state = (this.state === 'normal' ? 'smaller' : 'normal');
     if (this.isChatBoxActive) {
       setTimeout(() => {
@@ -87,17 +110,6 @@ export class BandProfileComponent implements OnInit {
   rate() {
     // console.log('Rate');
     this.rateDropDown = !this.rateDropDown;
-  }
-
-  getEvents(query: string) {
-    this.searching = true;
-    return this.eventService.getEvents(query).subscribe(data => {
-        this.events = data.events;
-        console.log(this.events);
-      }, error => console.log(error),
-      () => {
-        console.log('Events fetched completed');
-      });
   }
 
   sendPayment(eventId) {
@@ -151,7 +163,8 @@ export class BandProfileComponent implements OnInit {
     });
   }
 
-  deleteProfile(){
+
+  deleteProfile() {
     this.dialog.open(ProfileDeleteComponent, {
       data: {
         id: this.bandId,
@@ -161,11 +174,10 @@ export class BandProfileComponent implements OnInit {
     })
   }
 
-
   /**
    * Replaces all '\' with '/' and ' ' with '%20' to allow image lookups with back-slashes and spaces
    */
-  sanitizeImageLink(link: string){
-    return  link.replace(/\\/g, '/').replace(/ /g, '%20');
+  sanitizeImageLink(link: string) {
+    return link.replace(/\\/g, '/').replace(/ /g, '%20');
   }
 }
