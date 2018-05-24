@@ -21,9 +21,9 @@
           <input  type="password" matInput placeholder="Please provide your password" formControlName="password">
         </mat-form-field>
         <button *ngIf=activeResetComponent [disabled]="!loginForm.valid" (click)="onLoginSubmit()" mat-raised-button>Log in</button>
-        <a *ngIf=activeResetComponent id="lostPassword" (click)="redirectToResetPass()" href="#">Lost your password?</a>
+        <a *ngIf=activeResetComponent id="lostPassword" (click)="redirectToResetPass()" href="#"><span>L</span>ost your password<span>?</span></a>
         <br>
-        <a *ngIf=activeResetComponent id="registerAccount" (click)="redirecttoSubmit()" href="#">Don't have an account?</a>
+        <a *ngIf=activeResetComponent id="registerAccount" (click)="redirecttoSubmit()" href="#">Don't have an account<span>?</span></a>
       </form>
       <!-- RESET FORM <!-->
          <form  *ngIf=!activeResetComponent action="" method="post" [formGroup]="resetForm" class="form form-login">

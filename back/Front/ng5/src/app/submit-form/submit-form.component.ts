@@ -41,8 +41,9 @@ export class SubmitFormComponent implements OnInit {
     const elementId: string = (event.target as Element).id;
     console.log('You clicked on registration event');
     switch (elementId) {
-      case 'fanCard':
       case 'fanButton':
+      case 'fanCard':
+      
         this.fanIsChosen = 1;
         this.accountType = 'fan ';
         this.submissionSecondStepEvent.emit(this.trigger);
