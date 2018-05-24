@@ -60,4 +60,5 @@ export class HeaderComponent implements OnInit {
   createBand() {
     const dialogRef = this.dialog.open(CreateNewBandComponent);
   }
+
 }

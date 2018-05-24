@@ -14,6 +14,7 @@ export class ProfileDeleteComponent implements OnInit {
   id: string;
   apiUrl: string;
   deleted = false;
+  deleting = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -33,11 +34,17 @@ export class ProfileDeleteComponent implements OnInit {
   }
 
   deleteProfile() {
+    this.deleting = true;
     const url = this.apiUrl + this.id;
     this.httpClient.delete(url).subscribe(data => {
       console.log(data);
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('/main');
+      this.deleting = false;
       this.deleted = true;
     });
+  }
+
+  showMain(){
+    return !this.deleted && !this.deleting;
   }
 }
