@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {MatDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-create-new-band',
@@ -20,12 +21,17 @@ export class CreateNewBandComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public httpClient: HttpClient
+    public httpClient: HttpClient,
+    public dialogRef: MatDialogRef<CreateNewBandComponent>,
   ) {
   }
 
   ngOnInit() {
     console.log("Create band opened");
+  }
+
+  closeDialog(){
+    this.dialogRef.close();
   }
 
 
@@ -67,6 +73,7 @@ export class CreateNewBandComponent implements OnInit {
           const newId = data['createdBand']['_id'];
           // console.log(newId);
           this.router.navigateByUrl('/bandDetails/' + newId);
+          this.closeDialog();
         },
         error => {
           console.log(error);

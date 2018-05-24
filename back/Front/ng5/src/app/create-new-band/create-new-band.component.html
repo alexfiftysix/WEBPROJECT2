@@ -15,17 +15,6 @@
       <input [(ngModel)]="genre" name="genre" type="text" matInput placeholder="Genre" required>
     </mat-form-field>
 
-    <!--<mat-form-field floatLabel>-->
-      <!--<mat-label>Price</mat-label>-->
-      <!--<input [(ngModel)]="price" name="price" min="0" matInput placeholder="Band fee" required>-->
-    <!--</mat-form-field>-->
-
-    <!--<mat-form-field floatLabel>-->
-      <!--<mat-label>Contact Number</mat-label>-->
-      <!--<input [(ngModel)]="contactNumber" name="contactNumber" min="0" matInput-->
-             <!--placeholder="Contact number" required>-->
-    <!--</mat-form-field>-->
-
     <mat-form-field floatLabel>
       <mat-label>Location</mat-label>
       <input [(ngModel)]="location" name="location" type="text" matInput placeholder="Home town" required>
@@ -49,5 +38,5 @@
   </form>
 </main>
 <main *ngIf="uploading">
-  <p>Uploading your profile now... Please wait</p>
+  <p>Creating your band profile now... Please wait</p>
 </main>
