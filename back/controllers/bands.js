@@ -67,14 +67,14 @@ exports.bandsGetAll =  (req,res,next) =>{
     band.save().then(result=>{
         console.log(result);
         res.status(201).json({
-            message:"Band created sucesfully",
+            message:"Band created successfully",
             createdBand: {
                 _id: result._id,
                 name: result.name,
                 genre: result.genre,
                 price: result.price,
                 contactNumber: result.contactNumber,
-                availability: result.availability,
+                availability: true,
                 city: result.city,
                 rating: result.rating,
                 description: result.description,
@@ -86,7 +86,6 @@ exports.bandsGetAll =  (req,res,next) =>{
                 }
             }
         })
-
     })
     .catch(err => {
         console.log(err);

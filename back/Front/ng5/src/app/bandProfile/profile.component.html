@@ -1,14 +1,13 @@
-<main [@resizeProfile]='state' >
-    <div class="banner">
-    <img src="{{band?.image}}" alt="{{band?.name}}">
-</div>
+<main [@resizeProfile]='state'>
+  <!--<div class="banner"><img src="{{band?.image}}" alt="{{band?.name}}"></div>-->
+  <div class="banner" [ngStyle]="{'background-image': 'url(' + image + ')'}"></div>
   <div class="headWrap">
     <div class="title">
       <h1>{{ band?.name }}</h1>
       <h2>{{band?.city}}. {{band?.genre}}</h2>
     </div>
     <div class="buttons">
-      <button *ngIf="authService.loggedIn()"  mat-raised-button (click)="toogleChatBox()">Message</button>
+      <button *ngIf="authService.loggedIn()" mat-raised-button (click)="toogleChatBox()">Message</button>
       <button mat-raised-button="" id="rate" (click)="rate()">Rate
         <div *ngIf="rateDropDown" class="dropDown">
           <p>
@@ -16,7 +15,7 @@
           </p>
         </div>
       </button>
-      <button *ngIf="showContent" (click)= "getEvents('')" mat-raised-button (click)="toggleContentGigs()">Gigs</button>
+      <button *ngIf="showContent" (click)="getEvents('')" mat-raised-button (click)="toggleContentGigs()">Gigs</button>
       <button *ngIf="showGigs" mat-raised-button (click)="toggleContentGigs()">Profile</button>
     </div>
   </div>
@@ -26,10 +25,12 @@
       <p>{{ band?.description }}</p>
     </article>
     <aside>
-      <iframe *ngIf="isBand" style="border: 0; width: 350px; height: 470px;"
-              [src]="bandCampLink |safeUrl"
-              seamless><a href="http://streetpieces.bandcamp.com/album/everything-you-ever-wanted">Everything You Ever
-        Wanted by Street Pieces</a></iframe>
+      <!--<iframe *ngIf="isBand" style="border: 0; width: 350px; height: 470px;"-->
+      <!--[src]="bandCampLink |safeUrl"-->
+      <!--seamless><a href="http://streetpieces.bandcamp.com/album/everything-you-ever-wanted">Everything You Ever-->
+      <!--Wanted by Street Pieces</a></iframe>-->
+      <iframe [src]="spotifyPlayerLink | safeUrl" width="300" height="380"
+              frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
       <img *ngIf="isVenue" src="../../assets/images/fakeMap.JPG">
     </aside>
@@ -44,6 +45,7 @@
       <button mat-raised-button (click)="buyTickets(event?._id)">Buy tickets {{event?.price|currency}}</button>
     </div>
   </ng-container>
-  <app-chat-box *ngIf=isChatBoxActive  ></app-chat-box>
+  <app-chat-box *ngIf=isChatBoxActive></app-chat-box>
   <button mat-raised-button (click)="createNew()">Create new band</button>
+  <button mat-raised-button (click)="noProfile()">noProfile</button>
 </main>

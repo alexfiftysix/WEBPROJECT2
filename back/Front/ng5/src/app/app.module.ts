@@ -64,6 +64,7 @@ import { ChatBoxComponent } from './bandProfile/chat-box.component';
 import { SafeUrlPipe } from '../pipes/safe-url.pipe';
 import { DialogTestComponent } from './dialog-test/dialog-test.component';
 import { CreateNewBandComponent } from './create-new-band/create-new-band.component';
+import { ProfileDoesNotExistComponent } from './profile-does-not-exist/profile-does-not-exist.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { CreateNewBandComponent } from './create-new-band/create-new-band.compon
     SafeUrlPipe,
     DialogTestComponent,
     CreateNewBandComponent,
+    ProfileDoesNotExistComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,7 +132,8 @@ import { CreateNewBandComponent } from './create-new-band/create-new-band.compon
   ],
   entryComponents: [
     DialogTestComponent,
-    CreateNewBandComponent
+    CreateNewBandComponent,
+    ProfileDoesNotExistComponent
   ],
   providers: [
     MatDatepickerModule,

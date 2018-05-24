@@ -13,10 +13,10 @@ export class CreateNewBandComponent implements OnInit {
   id = '';
   name = '';
   genre = '';
-  price: number;
-  contactNumber: number;
+  price: string;
+  contactNumber: string;
   location = '';
-  banner: string;
+  banner: File = null;
   spotifyPlayerLink: string;
   bio: string;
   public editTrigger = false;
@@ -57,16 +57,29 @@ export class CreateNewBandComponent implements OnInit {
 
   create() {
     const url = this.apiUrl;
-    const body = {
-      name: this.name,
-      genre: this.genre,
-      price: this.price,
-      contactNumber: this.contactNumber,
-      location: this.location,
-      bio: this.bio,
-      image: this.banner,
-      spotifyPlayerLink: this.extractSpotifyLink(this.spotifyPlayerLink) //todo: Extract proper link
-    };
+
+    let body = new FormData();
+    body.append('name', this.name);
+    body.append('city', this.location);
+    body.append('genre', this.genre);
+    body.append('price', this.price);
+    body.append('contactNumber', this.contactNumber);
+    body.append('availability', 'true');
+    body.append('description', this.bio);
+    body.append('bandImage', this.banner);
+    body.append('rating', '0');
+
+
+    // const body = {
+    //   name: this.name,
+    //   genre: this.genre,
+    //   price: this.price,
+    //   contactNumber: this.contactNumber,
+    //   location: this.location,
+    //   bio: this.bio,
+    //   image: this.banner,
+    //   spotifyPlayerLink: this.extractSpotifyLink(this.spotifyPlayerLink) //todo: Extract proper link
+    // };
 
     this.httpClient.post(url, body)
       .subscribe(data => {
@@ -82,7 +95,7 @@ export class CreateNewBandComponent implements OnInit {
       );
   }
 
-  printStuff(){
+  handleFileInput(files: FileList) {
+    this.banner = files.item(0);
   }
-
 }

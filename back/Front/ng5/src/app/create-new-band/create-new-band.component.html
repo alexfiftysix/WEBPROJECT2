@@ -31,10 +31,10 @@
       <input [(ngModel)]="location" name="location" type="text" matInput placeholder="Home town" required>
     </mat-form-field>
 
-    <mat-form-field floatLabel>
-      <mat-label>Banner Image Link</mat-label>
-      <input [(ngModel)]="banner" name="banner" type="text" matInput placeholder="Banner image url">
-    </mat-form-field>
+    <label for="banner">Band Image</label>
+    <input id="banner" type="file" name="banner" (change)="handleFileInput($event.target.files)">
+    <!--<input [(ngModel)]="banner" name="banner" id="banner" type="file" placeholder="Banner image url"-->
+           <!--(change)="handleFileInput($event.target.files)">-->
 
     <mat-form-field floatLabel>
       <mat-label>Spotify Artist or Album url</mat-label>
@@ -47,6 +47,6 @@
                 placeholder="Tell us something interesting about your band"
                 required></textarea>
     </mat-form-field>
-    <button mat-raised-button (click)="printStuff()">Create</button>
+    <button mat-raised-button (click)="create()">Create</button>
   </form>
 </main>

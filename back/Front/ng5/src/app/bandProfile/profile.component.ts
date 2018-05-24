@@ -10,6 +10,7 @@ import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 
 import {DialogTestComponent} from '../dialog-test/dialog-test.component';
 import {CreateNewBandComponent} from '../create-new-band/create-new-band.component';
+import {ProfileDoesNotExistComponent} from "../profile-does-not-exist/profile-does-not-exist.component";
 
 @Component({
   selector: 'app-profile',
@@ -29,6 +30,7 @@ import {CreateNewBandComponent} from '../create-new-band/create-new-band.compone
 })
 
 export class BandProfileComponent implements OnInit {
+  bandId: string;
   bandCampLink = 'https://bandcamp.com/EmbeddedPlayer/album=77046358/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/';
   band;
   events = [];
@@ -40,6 +42,19 @@ export class BandProfileComponent implements OnInit {
   showGigs = false;
   isChatBoxActive = false;
   state = 'normal';
+  image: string;
+  spotifyPlayerLink = 'https://open.spotify.com/embed?uri=spotify:artist:36QJpDe2go2KgaRleHCDTp';
+
+  public ngOnInit() {
+    this.bandId = this.activatedRoute.snapshot.params['bandId'];
+    this.getBand(this.bandId);
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
+  }
 
   constructor(
     private bandService: BandsDataService,
@@ -68,17 +83,6 @@ export class BandProfileComponent implements OnInit {
   rate() {
     // console.log('Rate');
     this.rateDropDown = !this.rateDropDown;
-  }
-
-  public ngOnInit() {
-    const bandId = this.activatedRoute.snapshot.params['bandId'];
-    this.getBand(bandId);
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0, 0);
-    });
   }
 
   getEvents(query: string) {
@@ -115,7 +119,9 @@ export class BandProfileComponent implements OnInit {
       }, error => console.log(error),
       () => {
         this.searching = false;
-        console.log('Band' + bandId + ' fetched completed');
+        console.log('Band ' + bandId + ' fetch completed');
+        console.log(this.band['image']);
+        this.image = this.sanitizeImageLink(this.band['image']);
       }
     );
 
@@ -128,5 +134,20 @@ export class BandProfileComponent implements OnInit {
 
   createNew() {
     const dialogRef = this.dialog.open(CreateNewBandComponent);
+  }
+
+  noProfile() {
+    this.dialog.open(ProfileDoesNotExistComponent, {
+      data: {
+        id: this.bandId
+      }
+    });
+  }
+
+  /**
+   * Replaces all '\' with '/' and ' ' with '%20' to allow image lookups with back-slashes and spaces
+   */
+  sanitizeImageLink(link: string){
+    return  link.replace(/\\/g, '/').replace(/ /g, '%20');
   }
 }
