@@ -53,6 +53,13 @@ exports.sentNewPassword = (req,res,next) =>{
                     .then( result=>{
                         //change array to object since find method returns an array
                         const newUser = user[0]; 
+                        let mailOptions = {
+                            from: '"Bandz administration" <maciej.czarnota@gmail.com>', // sender address
+                            to:  newUser.username, // list of receivers
+                            subject: 'Welcome to Bandz System', // Subject line
+                            text: 'Hello world?', // plain text body
+                            html: mailtemplate.resetPasswordTemplate(newUser.password) // html body
+                        }
                         mail.generateEmail(newUser, templates.resetPasswordTemplate(newPassword));
                             res.status(200).json({
                                 success: 'sucess',
