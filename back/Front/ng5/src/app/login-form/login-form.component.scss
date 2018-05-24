@@ -174,26 +174,26 @@ mat-hint{
   color:  white !important;
   }
 
-/deep/ .mat-focused .mat-form-field-ripple {
-  background-color: white !important;
-}
+// /deep/ .mat-focused .mat-form-field-ripple {
+//   background-color: white !important;
+// }
 
-/deep/ .mat-focused .mat-form-field-ripple {
-  background-color: white !important;
-}
+// /deep/ .mat-focused .mat-form-field-ripple {
+//   background-color: white !important;
+// }
 
-/deep/ .mat-form-field-invalid .mat-form-field-ripple {
-  background-color: black;
-}
+// /deep/ .mat-form-field-invalid .mat-form-field-ripple {
+//   background-color: black;
+// }
 
-// !overriding color for inputs
-/deep/ .mat-form-field-wrapper {
-  padding-bottom: 0 !important;
-}
+// // !overriding color for inputs
+// /deep/ .mat-form-field-wrapper {
+//   padding-bottom: 0 !important;
+// }
 
-/deep/ .mat-form-field:nth-of-type(1) {
-  padding-bottom: 1.25em !important;
-}
+// /deep/ .mat-form-field:nth-of-type(1) {
+//   padding-bottom: 1.25em !important;
+// }
 
 .passwordMeterContainer {
   padding-bottom: 1.25em;

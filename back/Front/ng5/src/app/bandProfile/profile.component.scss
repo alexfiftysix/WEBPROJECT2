@@ -31,10 +31,10 @@ main {
 
       button {
         margin: 20px 0 20px 20px;
+        width: 100px !important;
       }
     }
   }
-
   .content {
     display: flex;
     justify-content: space-between;
@@ -99,4 +99,10 @@ main {
 
   }
 }
-
+button:hover{
+  background: #e5e5e5;
+-webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+-moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+outline: none;
+}
