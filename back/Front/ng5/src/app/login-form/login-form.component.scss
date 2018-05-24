@@ -60,7 +60,22 @@
 a {
   font-size: 1.2em;
 }
+a:hover{
+ text-decoration: underline;
+}
+button{
+  border:1px white solid !important;
+  color: white !important;
+  font-size: 1.2em !important;
+  margin-bottom: 1em;
+}
 
+button:hover{
+  border: 1px black solid !important;
+  color: black !important;
+  transition: 0.2s;
+  cursor: pointer;
+}
 #lostPassword {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -96,6 +111,7 @@ a {
 
 .x:hover {
   transform: rotate(180deg);
+  transition: 0.2s;
 }
 
 .x:before {
@@ -112,6 +128,7 @@ a {
   border-top: 1px solid white;
   transform: rotate(45deg);
   transform-origin: center;
+ 
 }
 
 .x:after {
@@ -129,6 +146,12 @@ a {
   border-top: 1px solid white;
   transform: rotate(-45deg);
   transform-origin: center;
+}
+.x:hover::after{
+  border-top: 1px black solid;
+}
+.x:hover::before{
+  border-top: 1px black solid;
 }
 
 /** !CLOSE X STYLING **/
