@@ -15,7 +15,30 @@ header {
   justify-content: flex-start;
   align-items: center;
 }
+.createBand{
+  font-size: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  vertical-align: middle;
+  a:hover:before{
+    -webkit-transform: scaleX(0) !important;
+    transform: scaleX(0) !important;
+  }
+}
+.button{
+  width: 4em;
+  height: 4em;
+  margin-bottom: 0.5em;
+}
+.button:hover{
+  opacity: 0.8;
+  -webkit-box-shadow: inset 0px 0px 5px #7c7575;
+  -moz-box-shadow: inset 0px 0px 5px #7c7575;
+      box-shadow: inset 0px 0px 5px #7c7575;
+  outline: none;
 
+}
 ul {
   list-style: none;
   display: flex;
