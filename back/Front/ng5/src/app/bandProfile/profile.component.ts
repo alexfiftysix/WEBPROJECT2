@@ -166,10 +166,6 @@ export class BandProfileComponent implements OnInit {
     this.showGigs = !this.showGigs;
   }
 
-  createNew() {
-    const dialogRef = this.dialog.open(CreateNewBandComponent);
-  }
-
   noProfile() {
     this.dialog.open(ProfileDoesNotExistComponent, {
       data: {
