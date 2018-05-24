@@ -1,8 +1,7 @@
 const nodemailer = require('nodemailer');
 
 module.exports = {
-    generateEmail: function (options, template) {
-        var mail = template;
+    generateEmail: function (options) {
        // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -12,9 +11,6 @@ module.exports = {
           user: 'maciej.czarnota@gmail.com', // generated ethereal user
           pass: 'Boros_Signet23' // generated ethereal password
       }
-      // tls: {
-
-      // }
   });
 
   // setup email data with unicode symbols
