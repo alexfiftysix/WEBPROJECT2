@@ -78,6 +78,17 @@
       line-height: 0 !important;
       margin:auto;
     }
+    .background {
+      background-color: white !important;
+     
+      width: 4em;
+      height: 4em;
+    }
+    h3{
+      font-size: 0.7em;
+      display: inline;
+      margin: 0;
+    }
     .filterInput{
       margin: 0;
       visibility: hidden;
@@ -260,9 +271,8 @@ app-event-card, app-band-card{
 
  
 }
-mat-card-image{
-  border: 1px red solid;
-}
+
+
 .bandImage {
   background-size: cover;
   background: no-repeat center;

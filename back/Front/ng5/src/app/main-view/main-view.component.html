@@ -28,12 +28,14 @@
         <input name="input" [matDatepicker]="picker" [(ngModel)]="dateInput"
                [style.visibility]="isButtonChangePickerActive ? 'visible': 'hidden'">
       </div>
-      <div>
-        <button class="filterButton" (click)="openValueSlider()" mat-button>Price</button>
-        <p-slider [style.visibility]="isValueSliderActive ? 'visible': 'hidden'" [animate]="true"
+      <!-- class="message"(click)="showFirst=!showFirst"*ngIf="authService.loggedIn()" mat-raised-button (click)="toggleChatBox()">Message <i class="material-icons"*ngIf="showFirst">drafts</i><i class="material-icons"*ngIf="!showFirst"></i> -->
+      <div >
+        <button (click)="showFirst=!showFirst" class="filterButton"  mat-button>Price</button>
+        <p-slider  *ngIf="showFirst" [animate]="true"
                   [(ngModel)]="rangeValues" [style]="{'width':'200px'}" [range]="true">
         </p-slider>
-        <h3 [style.visibility]="isValueSliderActive ? 'visible': 'hidden'">
+       
+        <h3  *ngIf="showFirst" >
           Range: {{rangeValues[0] + ' - ' + rangeValues[1]}}</h3>
       </div>
       <mat-datepicker #picker></mat-datepicker>
