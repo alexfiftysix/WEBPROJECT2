@@ -31,7 +31,6 @@ main {
 
       button {
         margin: 20px 0 20px 20px;
-        width: 100px !important;
       }
     }
   }
@@ -66,9 +65,7 @@ main {
     margin: 0;
   }
 
-  h2 {
-    margin: 0;
-  }
+ 
 
   .event {
     background-color: $color-lighter;
@@ -106,3 +103,14 @@ button:hover{
     box-shadow: inset 0px 0px 5px #c1c1c1;
 outline: none;
 }
+star-rating-comp{
+  display: inline-block;
+ justify-content: none !important;
+}
+.title{
+  display: inline-block;
+}
+.message{
+  border: 1px red solid;
+}
+

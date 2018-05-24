@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="logInWindow">
     <div class="title">
-      <h1>{{title}}</h1>
+      <h1 [class.fontSize]="isChanged">{{title}}</h1>
       <div class="x" (click)=closeLoginForm()></div>
     </div>
     <div class="Container">
@@ -21,7 +21,7 @@
           <input  type="password" matInput placeholder="Please provide your password" formControlName="password">
         </mat-form-field>
         <button *ngIf=activeResetComponent [disabled]="!loginForm.valid" (click)="onLoginSubmit()" mat-raised-button>Log in</button>
-        <a *ngIf=activeResetComponent id="lostPassword" (click)="redirectToResetPass()" href="#"><span>L</span>ost your password<span>?</span></a>
+        <a *ngIf=activeResetComponent  id="lostPassword" (click)="redirectToResetPass()" href="#">Lost your password<span>?</span></a>
         <br>
         <a *ngIf=activeResetComponent id="registerAccount" (click)="redirecttoSubmit()" href="#">Don't have an account<span>?</span></a>
       </form>

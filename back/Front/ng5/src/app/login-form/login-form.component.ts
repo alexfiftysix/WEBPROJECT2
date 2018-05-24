@@ -15,6 +15,7 @@ import { Http, Headers} from '@angular/http';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
+  isChanged = false; 
   title: String = 'Log In to BANDZ account';
   @Output() public openSubmitFormEvent = new EventEmitter();
   activeResetComponent = true;
@@ -45,6 +46,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   closeLoginForm() {
     this.trigger = false;
     this.LoginEvent.emit(this.trigger);
+    this.isChanged = false;
   }
   redirecttoSubmit() {
     // redirects the user to LoginForm
@@ -56,6 +58,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     // redirects to the reset password Form
     this.title = 'Enter the email you use for Band\'s, and we’ll help you create a new password.';
     this.activeResetComponent = false;
+    this.isChanged = true;
+    return this.isChanged;
+
   }
   openSnackBar(msg: String, color: String) {
     // open Box that shows if the account has been been logged in

@@ -5,18 +5,25 @@
     <div class="title">
       <h1>{{ band?.name }}</h1>
       <h2>{{band?.city}}. {{band?.genre}}</h2>
+      <star-rating-comp class="rating"[size]="'medium'" [readOnly]="false"[hoverEnabled]="true"[showHalfStars]="true"class="ratingImage"[starType]="'svg'" [rating]="5"></star-rating-comp>
+
     </div>
     <div class="buttons">
-      <button *ngIf="authService.loggedIn()" mat-raised-button (click)="toggleChatBox()">Message</button>
-      <button mat-raised-button="" id="rate" (click)="rate()">Rate
-        <div *ngIf="rateDropDown" class="dropDown">
-            <star-rating-comp [size]="'small'" [readOnly]="false"[hoverEnabled]="true"[showHalfStars]="true"class="ratingImage"[starType]="'svg'" [rating]="5"></star-rating-comp>
+      <button class="message"(click)="showFirst=!showFirst"*ngIf="authService.loggedIn()" mat-raised-button (click)="toggleChatBox()">Message <i class="material-icons"*ngIf="showFirst">drafts</i><i class="material-icons"*ngIf="!showFirst">
+        mail
+        </i><i class="material-icons"*ngIf="showFirst">
+            keyboard_arrow_left
+            </i><i class="material-icons"*ngIf="!showFirst">
+                keyboard_arrow_right
+                </i></button>
 
+      <!-- <button mat-raised-button="" id="rate" (click)="rate()">Rate
+        <div *ngIf="rateDropDown" class="dropDown">
           <!-- <p>
             1 2 3 45
           </p> -->
-        </div>
-      </button>
+        <!-- </div>
+      </button>  -->
       <button *ngIf="showContent" mat-raised-button (click)="toggleContentGigs()">Gigs</button>
       <button *ngIf="showGigs" mat-raised-button (click)="toggleContentGigs()">Profile</button>
     </div>
