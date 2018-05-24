@@ -10,6 +10,7 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./create-new-band.component.scss']
 })
 export class CreateNewBandComponent implements OnInit {
+  uploading: boolean = false;
   id = '';
   name = '';
   genre = '';
@@ -57,6 +58,7 @@ export class CreateNewBandComponent implements OnInit {
 
   create() {
     const url = this.apiUrl;
+    this.uploading = true;
 
     let body = new FormData();
     body.append('name', this.name);
@@ -67,6 +69,7 @@ export class CreateNewBandComponent implements OnInit {
     body.append('availability', 'true');
     body.append('description', this.bio);
     body.append('bandImage', this.banner);
+    body.append('music', this.extractSpotifyLink(this.spotifyPlayerLink));
     body.append('rating', '0');
 
 
@@ -84,9 +87,9 @@ export class CreateNewBandComponent implements OnInit {
     this.httpClient.post(url, body)
       .subscribe(data => {
           console.log(data);
-          const newId = data['addedBand']['_id'];
+          const newId = data['createdBand']['_id'];
           // console.log(newId);
-          this.router.navigateByUrl('/profile/' + newId);
+            this.router.navigateByUrl('/bandDetails/' + newId);
           this.closeDialog();
         },
         error => {

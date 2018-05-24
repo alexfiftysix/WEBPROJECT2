@@ -1,4 +1,4 @@
-<main>
+<main *ngIf="!uploading">
   <header>
     <h1 mat-dialog-title>Edit profile</h1>
     <p>All fields marked with '*' are required</p>
@@ -38,7 +38,7 @@
 
     <mat-form-field floatLabel>
       <mat-label>Spotify Artist or Album url</mat-label>
-      <input name="spotifyPlayerLink" [(ngModel)]="spotifyPlayerLink" matInput>
+      <input name="spotifyPlayerLink" [(ngModel)]="spotifyPlayerLink" matInput required>
     </mat-form-field>
 
     <mat-form-field floatLabel>
@@ -49,4 +49,7 @@
     </mat-form-field>
     <button mat-raised-button (click)="create()">Create</button>
   </form>
+</main>
+<main *ngIf="uploading">
+  <p>Uploading your profile now... Please wait</p>
 </main>

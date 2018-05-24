@@ -1,7 +1,7 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {EventsDataService} from '../front-view/suggestions/events.service';
-import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
+import {Router, ActivatedRoute, NavigationEnd, Params} from '@angular/router';
 import {BandsDataService} from '../front-view/suggestions/bands.service';
 import {ChatBoxComponent} from './chat-box.component';
 import {trigger, state, style, transition, animate, keyframes} from '@angular/animations';
@@ -11,6 +11,7 @@ import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 import {DialogTestComponent} from '../dialog-test/dialog-test.component';
 import {CreateNewBandComponent} from '../create-new-band/create-new-band.component';
 import {ProfileDoesNotExistComponent} from "../profile-does-not-exist/profile-does-not-exist.component";
+import {ProfileDeleteComponent} from "../profile-delete/profile-delete.component";
 
 @Component({
   selector: 'app-profile',
@@ -45,17 +46,6 @@ export class BandProfileComponent implements OnInit {
   image: string;
   spotifyPlayerLink = 'https://open.spotify.com/embed?uri=spotify:artist:36QJpDe2go2KgaRleHCDTp';
 
-  public ngOnInit() {
-    this.bandId = this.activatedRoute.snapshot.params['bandId'];
-    this.getBand(this.bandId);
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0, 0);
-    });
-  }
-
   constructor(
     private bandService: BandsDataService,
     private activatedRoute: ActivatedRoute,
@@ -66,6 +56,20 @@ export class BandProfileComponent implements OnInit {
     public dialog: MatDialog
     // @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+  }
+
+  public ngOnInit() {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.bandId = this.activatedRoute.snapshot.params['bandId'];
+      this.getBand(this.bandId);
+      this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+          return;
+        }
+        window.scrollTo(0, 0);
+      });
+    });
+
   }
 
   toogleChatBox() {
@@ -120,8 +124,11 @@ export class BandProfileComponent implements OnInit {
       () => {
         this.searching = false;
         console.log('Band ' + bandId + ' fetch completed');
-        console.log(this.band['image']);
         this.image = this.sanitizeImageLink(this.band['image']);
+        console.log(this.image);
+        if (this.band['music'] != null && this.band['music'] != '') {
+          this.spotifyPlayerLink = this.band['music'];
+        }
       }
     );
 
@@ -143,6 +150,17 @@ export class BandProfileComponent implements OnInit {
       }
     });
   }
+
+  deleteProfile(){
+    this.dialog.open(ProfileDeleteComponent, {
+      data: {
+        id: this.bandId,
+        name: this.band['name'],
+        url: 'http://52.40.161.160:3000/bands/' //todo: Get sensibly
+      }
+    })
+  }
+
 
   /**
    * Replaces all '\' with '/' and ' ' with '%20' to allow image lookups with back-slashes and spaces

@@ -65,6 +65,7 @@ import { SafeUrlPipe } from '../pipes/safe-url.pipe';
 import { DialogTestComponent } from './dialog-test/dialog-test.component';
 import { CreateNewBandComponent } from './create-new-band/create-new-band.component';
 import { ProfileDoesNotExistComponent } from './profile-does-not-exist/profile-does-not-exist.component';
+import { ProfileDeleteComponent } from './profile-delete/profile-delete.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { ProfileDoesNotExistComponent } from './profile-does-not-exist/profile-d
     DialogTestComponent,
     CreateNewBandComponent,
     ProfileDoesNotExistComponent,
+    ProfileDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,7 +135,8 @@ import { ProfileDoesNotExistComponent } from './profile-does-not-exist/profile-d
   entryComponents: [
     DialogTestComponent,
     CreateNewBandComponent,
-    ProfileDoesNotExistComponent
+    ProfileDoesNotExistComponent,
+    ProfileDeleteComponent
   ],
   providers: [
     MatDatepickerModule,
