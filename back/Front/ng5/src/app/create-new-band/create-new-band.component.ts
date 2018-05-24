@@ -1,8 +1,6 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-create-new-band',
@@ -11,33 +9,25 @@ import {NgForm} from "@angular/forms";
 })
 export class CreateNewBandComponent implements OnInit {
   uploading: boolean = false;
-  id = '';
-  name = '';
-  genre = '';
-  price: string;
-  contactNumber: string;
-  location = '';
+  id: string = '';
+  name: string = '';
+  genre: string = '';
+  location: string = '';
   banner: File = null;
   spotifyPlayerLink: string;
   bio: string;
-  public editTrigger = false;
-  // apiUrl = 'http://' + window.location.hostname + ":3000/bands/";
-  apiUrl = 'http://' + '52.40.161.160' + ":3000/bands/";
+  apiUrl: string = 'http://52.40.161.160:3000/bands/';
 
   constructor(
     private router: Router,
-    public dialogRef: MatDialogRef<CreateNewBandComponent>,
-    public httpClient: HttpClient,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    public httpClient: HttpClient
   ) {
   }
 
   ngOnInit() {
+    console.log("Create band opened");
   }
 
-  closeDialog() {
-    this.dialogRef.close('Dialog Closed!');
-  }
 
   /**
    * takes a spotify web player url and converts it to a spotify embed link
@@ -47,7 +37,6 @@ export class CreateNewBandComponent implements OnInit {
     //todo: test this.
     // input = 'https://open.spotify.com/album/00Sakx8QohezyzMAd99gqO';
     // result = 'https://open.spotify.com/embed?uri=spotify:album:00Sakx8QohezyzMAd99gqO';
-
     const head = 'https://open.spotify.com/embed?uri=spotify:';
     const splitty = spotifyLink.split('/');
     const type = splitty[3] + ':';
@@ -64,8 +53,8 @@ export class CreateNewBandComponent implements OnInit {
     body.append('name', this.name);
     body.append('city', this.location);
     body.append('genre', this.genre);
-    body.append('price', this.price);
-    body.append('contactNumber', this.contactNumber);
+    body.append('price', '0');
+    body.append('contactNumber', '0');
     body.append('availability', 'true');
     body.append('description', this.bio);
     body.append('bandImage', this.banner);
@@ -77,8 +66,7 @@ export class CreateNewBandComponent implements OnInit {
           console.log(data);
           const newId = data['createdBand']['_id'];
           // console.log(newId);
-            this.router.navigateByUrl('/bandDetails/' + newId);
-          this.closeDialog();
+          this.router.navigateByUrl('/bandDetails/' + newId);
         },
         error => {
           console.log(error);

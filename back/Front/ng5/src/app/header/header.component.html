@@ -6,7 +6,7 @@
     <li *ngIf="!authService.loggedIn()"><a (click)="openSubmitForm()">Sign up</a></li>
     <li *ngIf="!authService.loggedIn()"><a (click)="openLoginForm()">Log in</a></li>
     <li *ngIf="authService.loggedIn()"><a href="#/main">Find bands & events</a></li>
-    <li *ngIf="authService.loggedIn()"><a href="#" (click)="createBand()">Create a band</a></li>
+    <li *ngIf="authService.loggedIn()"(click)="createBand()"><a>Create a band</a></li>
     <li *ngIf="authService.loggedIn()"><a href="#" (click)="onLogout()">Log out</a></li>
   </ul>
 </header>
