@@ -15,9 +15,10 @@ export class CreateNewBandComponent implements OnInit {
   genre: string = '';
   location: string = '';
   banner: File = null;
-  spotifyPlayerLink: string;
-  bio: string;
+  spotifyPlayerLink: string = '';
+  bio: string = '';
   apiUrl: string = 'http://52.40.161.160:3000/bands/';
+  phone: string = '';
 
   constructor(
     private router: Router,
@@ -30,7 +31,7 @@ export class CreateNewBandComponent implements OnInit {
     console.log("Create band opened");
   }
 
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
 
@@ -60,7 +61,7 @@ export class CreateNewBandComponent implements OnInit {
     body.append('city', this.location);
     body.append('genre', this.genre);
     body.append('price', '0');
-    body.append('contactNumber', '0');
+    body.append('contactNumber', this.phone);
     body.append('availability', 'true');
     body.append('description', this.bio);
     body.append('bandImage', this.banner);
@@ -84,4 +85,53 @@ export class CreateNewBandComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.banner = files.item(0);
   }
+
+  formValid() {
+    if (!this.requiredFieldsFilled){
+      return false;
+    }
+
+    if (!this.imageUploaded()){
+      return false;
+    }
+
+    return this.spotifyLinkValid();
+  }
+
+  spotifyLinkValid(){
+    if (this.spotifyPlayerLink.length < 1) {
+      return false;
+    }
+    let musicSplit = this.spotifyPlayerLink.split('/');
+    console.log(musicSplit);
+
+    if (musicSplit.length < 5) {
+      return false;
+    }
+    if (musicSplit[2] != 'open.spotify.com') {
+      return false;
+    }
+    if (musicSplit[3] != 'artist' && musicSplit[2] != 'band') {
+      return false;
+    }
+    return true;
+  }
+
+  requiredFieldsFilled(){
+    if (this.name.length < 1) {
+      return false;
+    }
+    if (this.bio.length < 1) {
+      return false;
+    }
+    return true;
+  }
+
+  imageUploaded(){
+    //todo: Check file is jpg or png
+    return this.banner;
+  }
+
+  //todo: validate phone number
 }
+

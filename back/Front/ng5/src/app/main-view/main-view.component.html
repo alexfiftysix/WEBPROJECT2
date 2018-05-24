@@ -51,7 +51,7 @@
                       (mouseleave)="event.hovered = false"
                       *ngFor="let event of events | EventSearchFilter: dateInput : rangeValues "
                       [event]="event"></app-event-card>
-      <h2 class="paragraph">Discover the best bands across Australia</h2>
+      <h2 class="paragraph">Discover great bands</h2>
       <app-band-card (click)="redirectToBandProfile(band._id)" (mouseenter)="band.hovered = true"
                      (mouseleave)="band.hovered = false"
                      [band]="band" *ngFor="let band of bands"></app-band-card>
