@@ -2,6 +2,7 @@
   <p>
     Are you sure you want to delete {{name}}?
   </p>
+  <p>{{apiUrl + id}}</p>
   <div>
     <button mat-raised-button (click)="cancel()">Cancel</button>
     <button mat-raised-button (click)="deleteProfile()">Delete</button>
@@ -10,7 +11,7 @@
 
 <main *ngIf="deleted">
   <p>
-    Profile <{{name}}> deleted successfully.
+    <{{name}}> deleted successfully.
   </p>
   <div>
     <button mat-raised-button (click)="cancel()">Ok</button>

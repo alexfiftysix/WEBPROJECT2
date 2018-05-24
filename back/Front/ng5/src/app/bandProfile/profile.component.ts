@@ -3,15 +3,15 @@ import {AuthService} from '../../services/auth.service';
 import {EventsDataService} from '../front-view/suggestions/events.service';
 import {Router, ActivatedRoute, NavigationEnd, Params} from '@angular/router';
 import {BandsDataService} from '../front-view/suggestions/bands.service';
-import {ChatBoxComponent} from './chat-box.component';
 import {trigger, state, style, transition, animate, keyframes} from '@angular/animations';
-import {Http, Response} from '@angular/http';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+import {Http} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {MatDialog} from '@angular/material';
 import {CreateNewBandComponent} from '../create-new-band/create-new-band.component';
 import {ProfileDoesNotExistComponent} from '../profile-does-not-exist/profile-does-not-exist.component';
 import {ProfileDeleteComponent} from '../profile-delete/profile-delete.component';
 import {CreateEventComponent} from '../create-event/create-event.component';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -52,9 +52,10 @@ export class BandProfileComponent implements OnInit {
     private eventService: EventsDataService,
     private http: Http,
     public dialog: MatDialog,
-    private _HTTP: HttpClient
+    private httpClient: HttpClient
     // @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+  }
 
   public ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -117,7 +118,10 @@ export class BandProfileComponent implements OnInit {
   getBand(bandId) {
     this.bandService.getBandbyId(bandId).subscribe(data => {
         this.band = data;
-      }, error => console.log(error),
+      }, error => {
+        console.log(error);
+        this.noProfile();
+      },
       () => {
         console.log('Band ' + bandId + ' fetch completed');
         this.image = this.sanitizeImageLink(this.band['image']);
@@ -126,34 +130,35 @@ export class BandProfileComponent implements OnInit {
           this.spotifyPlayerLink = this.band['music'];
         }
       });
-    }
+  }
 
-generatePDF() {
-  const name = 'Maciej';
-  const description = 'alsla';
-  const headers: any = new HttpHeaders({
-    'Content-Type': 'application/json' }),
-      options: any = { name : name, description : description },
+  generatePDF() {
+    const name = 'Maciej';
+    const description = 'alsla';
+    const headers: any = new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      options: any = {name: name, description: description},
       url: any = 'http://localhost:3000/pdf/';
 
-  this._HTTP
-  .get(url, { responseType: 'arraybuffer' })
-  .subscribe((data: any) => {
-     // If the request was successful notify the user
-    //  this.displayNotification(name + ' was successfully created');
-    window.open(URL.createObjectURL(
-        new Blob([data], {type: 'application/pdf'})));
-    console.log('succes');
-  },
-  (error: any) => {
-     console.dir(error);
-  });
-}
+    this.httpClient
+      .get(url, {responseType: 'arraybuffer'})
+      .subscribe((data: any) => {
+          // If the request was successful notify the user
+          //  this.displayNotification(name + ' was successfully created');
+          window.open(URL.createObjectURL(
+            new Blob([data], {type: 'application/pdf'})));
+          console.log('succes');
+        },
+        (error: any) => {
+          console.dir(error);
+        });
+  }
 
-sendPayment(eventId) {
-  console.log(eventId);
-  return this.http.post('http://localhost:3000/pay/' + eventId, '')
-    .map(res => res.json());
+  sendPayment(eventId) {
+    console.log(eventId);
+    return this.http.post('http://localhost:3000/pay/' + eventId, '')
+      .map(res => res.json());
   }
 
   toggleContentGigs() {

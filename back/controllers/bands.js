@@ -1,54 +1,54 @@
 const Band = require('../models/band');
 const mongoose = require('mongoose');
 //GET ALL BANDS
-exports.bandsGetAll =  (req,res,next) =>{
+exports.bandsGetAll = (req, res, next) => {
     const query = req.query.query;
     let options;
-    if (query){
+    if (query) {
         console.log('query is not empty');
-        options = { $or: [ { name: query }, { genre: query }, {city: query} ] }
-    } else{
+        options = {$or: [{name: query}, {genre: query}, {city: query}]}
+    } else {
         console.log('query is empty');
         options = {};
     }
     Band.find(options)
-    .collation( { locale: 'en', strength: 2 } )
-    .select('name  rating genre price contactNumber availability city description music image')
-    .exec()
-    .then( docs =>{
-        const response = {
-            count: docs.length,
-            bands: docs.map( doc =>{
-                return {
-                 _id: doc._id,
-                 name: doc.name,
-                 genre: doc.genre,
-                 price: doc.price,
-                 rating: doc.rating,
-                 contactNumber: doc.contactNumber,
-                 availability: doc.availability,
-                 city: doc.city,
-                 description: doc.description,
-                 music: doc.music,
-                 image: "http://52.40.161.160:3000/" + doc.image,
-                 request: {
-                     type: "GET",
-                     URL: "http://52.40.161.160:3000/bands/" + doc._id
-                 }
- 
-                }
-            })
-        };
-        res.status(200).json(response);
-    })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({error:err});
-    });
- };
- 
+        .collation({locale: 'en', strength: 2})
+        .select('name  rating genre price contactNumber availability city description music image')
+        .exec()
+        .then(docs => {
+            const response = {
+                count: docs.length,
+                bands: docs.map(doc => {
+                    return {
+                        _id: doc._id,
+                        name: doc.name,
+                        genre: doc.genre,
+                        price: doc.price,
+                        rating: doc.rating,
+                        contactNumber: doc.contactNumber,
+                        availability: doc.availability,
+                        city: doc.city,
+                        description: doc.description,
+                        music: doc.music,
+                        image: "http://52.40.161.160:3000/" + doc.image,
+                        request: {
+                            type: "GET",
+                            URL: "http://52.40.161.160:3000/bands/" + doc._id
+                        }
+
+                    }
+                })
+            };
+            res.status(200).json(response);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+};
+
 //CREATE A BAND
- exports.createBand = (req,res,next) =>{
+exports.createBand = (req, res, next) => {
     //Create and store the band
     const band = new Band({
         _id: new mongoose.Types.ObjectId(),
@@ -64,10 +64,10 @@ exports.bandsGetAll =  (req,res,next) =>{
         image: req.file.path
     });
     //save the band to DB
-    band.save().then(result=>{
+    band.save().then(result => {
         console.log(result);
         res.status(201).json({
-            message:"Band created successfully",
+            message: "Band created successfully",
             createdBand: {
                 _id: result._id,
                 name: result.name,
@@ -87,68 +87,68 @@ exports.bandsGetAll =  (req,res,next) =>{
             }
         })
     })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({error:err})
-    });   
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err})
+        });
 };
 
 //GET INDIVIDUAL BAND
-exports.getOneBand = (req,res,next) =>{
+exports.getOneBand = (req, res, next) => {
     const id = req.params.bandId;
     Band.findById(id)
-    .select('name rating  genre price contactNumber availability city description music image')
-    .exec()
-    .then(doc => {
-        doc.image = "http://52.40.161.160:3000/" + doc.image;
-        console.log(doc);
-        if(doc){
-            res.status(200).json(doc);
-        } else{
-            res.status(404).json({"message": "No valid entry found for provided band ID"})
-        }
+        .select('name rating  genre price contactNumber availability city description music image')
+        .exec()
+        .then(doc => {
+            doc.image = "http://52.40.161.160:3000/" + doc.image;
+            console.log(doc);
+            if (doc) {
+                res.status(200).json(doc);
+            } else {
+                res.status(404).json({"message": "No valid entry found for provided band ID"})
+            }
 
-    })
-    .catch(err => {
-       console.log(err);
-       res.status(500).json({error: err});
-    })
-    };
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        })
+};
 
 //DELETE INDIVIDUAL BAND
-exports.deleteOneBand = (req,res,next) =>{
+exports.deleteOneBand = (req, res, next) => {
     const id = req.params.bandId;
     //remove any band that has this id
-   Band.remove({_id:id})
-   .exec()
-   .then(results =>{
-       console.log(results);
-       res.status(200).json(results);
-   })
-   .catch(err=>{
-       console.log(err);
-       res.status(500).json({error: err})
-   });
+    Band.remove({_id: id})
+        .exec()
+        .then(results => {
+            console.log(results);
+            res.status(200).json(results);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err})
+        });
 };
 
 //MODIFY INDIVIDUAL BAND
-exports.modifyOneBand = (req,res,next) =>{
+exports.modifyOneBand = (req, res, next) => {
     const id = req.params.bandId;
-    const updateOps= {};
+    const updateOps = {};
     //for each property check if we want to update
-    for (const ops of req.body){
+    for (const ops of req.body) {
         console.log(req.body);
         updateOps[ops.propName] = ops.value;
     }
-     //update any band that has this id
-    Band.update({_id:id}, { $set: updateOps})
-    .exec()
-    .then(result=>{
-        console.log(result);
-        res.status(200).json(result)
-    })
-    .catch(err =>{
-        console.log(err);
-        res.status(500).json({error: err});
-    })
+    //update any band that has this id
+    Band.update({_id: id}, {$set: updateOps})
+        .exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json(result)
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        })
 };

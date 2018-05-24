@@ -19,6 +19,7 @@ export class CreateEventComponent implements OnInit {
   banner: File = null;
   description: string;
   date: string;
+  waiting: boolean = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -32,12 +33,12 @@ export class CreateEventComponent implements OnInit {
     this.bandId = this.data.id;
   }
 
+
   create() {
+    this.waiting = true;
     const url = 'http://52.40.161.160:3000/events/'; //todo: get this better
 
     let body = new FormData();
-    console.log(this.date);
-
     body.append('headlinerId', this.bandId);
     body.append('name', this.name);
     body.append('price', this.price);
@@ -45,6 +46,7 @@ export class CreateEventComponent implements OnInit {
     body.append('venueName', this.venue);
     body.append('image', this.banner);
     body.append('date', this.date);
+    body.append('description', this.description);
 
     this.httpClient.post(url, body)
       .subscribe(data => {

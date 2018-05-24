@@ -25,10 +25,6 @@
       <p>{{ band?.description }}</p>
     </article>
     <aside>
-      <!--<iframe *ngIf="isBand" style="border: 0; width: 350px; height: 470px;"-->
-      <!--[src]="bandCampLink |safeUrl"-->
-      <!--seamless><a href="http://streetpieces.bandcamp.com/album/everything-you-ever-wanted">Everything You Ever-->
-      <!--Wanted by Street Pieces</a></iframe>-->
       <iframe [src]="spotifyPlayerLink | safeUrl" width="300" height="380"
               frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
@@ -48,7 +44,6 @@
   </ng-container>
   <app-chat-box *ngIf=isChatBoxActive></app-chat-box>
   <button mat-raised-button (click)="createNew()">Create new band</button>
-  <button mat-raised-button (click)="noProfile()">noProfile</button>
   <button mat-raised-button (click)="deleteProfile()">Delete Band</button>
   <button mat-raised-button (click)="createEvent()">Create Event</button>
 </main>

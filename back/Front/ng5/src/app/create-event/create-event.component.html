@@ -1,4 +1,4 @@
-<main>
+<main *ngIf="!waiting">
   <header>
     <h1 mat-dialog-title>Create new Event</h1>
   </header>
@@ -41,4 +41,7 @@
   </mat-dialog-actions>
 
   <button mat-raised-button (click)="create()">Confirm</button>
+</main>
+<main *ngIf="waiting">
+  <p>Event uploading, please wait...</p>
 </main>
