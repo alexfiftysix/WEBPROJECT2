@@ -10,7 +10,7 @@ import {URLSearchParams} from '@angular/http';
 export class BandsDataService {
 
 private _bandsURL = 'http://52.40.161.160:3000/bands/';
-private perPage: string = '&per_page=10';
+private perPage: String = '&per_page=10';
 constructor(private http: Http) {}
 getBands(searchQuery: string) {
   const search = new URLSearchParams();

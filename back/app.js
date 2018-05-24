@@ -36,6 +36,7 @@ mongoose.connection.on('error', (error)=>{
 })
 
 //Redirects end point routes if starts with those words
+const pdf = require('./routes/pdf');
 const users = require('./routes/users');
 const bands = require('./routes/bands');
 const places  = require('./routes/places');
@@ -73,6 +74,7 @@ app.use('/places',places);
 app.use('/events',events);
 app.use('/pay',paypal);
 app.use('/chat', chat);
+app.use('/pdf', pdf);
 //Index Route
 app.get('/', (req,res)=>{
     res.send("Invalid endpoint");

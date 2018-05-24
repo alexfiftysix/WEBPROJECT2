@@ -15,3 +15,11 @@ exports.newUserTemplate = function (accountInfo){
 exports.resetPasswordTemplate = function (password){
         return `<p> <b>new password:</b> ${password}  </p>`
 }
+
+exports.pdfTemplate = function (){
+        `<h1> Thank for your order</h1>
+        <p> Thanks for purchasing the ticket to one of our events!. Hope you will
+        have a great time listening to the best music!! </p>
+        <p>We attached the ticket. Please print it before going to the gig.</p>
+        <p>Thanks so much!!</p>`
+}

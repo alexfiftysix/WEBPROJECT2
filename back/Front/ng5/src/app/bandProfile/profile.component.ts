@@ -6,6 +6,7 @@ import { BandsDataService } from '../front-view/suggestions/bands.service';
 import {ChatBoxComponent} from '../bandProfile/chat-box.component';
 import {trigger, state, style, transition, animate, keyframes} from '@angular/animations';
 import {Http, Response} from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -57,7 +58,8 @@ export class BandProfileComponent implements OnInit {
       private router: Router,
       public authService: AuthService,
       private eventService: EventsDataService,
-      private http: Http
+      private http: Http,
+      private _HTTP: HttpClient
     ) {
   }
 
@@ -82,9 +84,31 @@ getEvents(query: string) {
 });
 }
 
+generatePDF() {
+  const name = 'Maciej';
+  const description = 'alsla';
+  const headers: any = new HttpHeaders({
+    'Content-Type': 'application/json' }),
+      options: any = { name : name, description : description },
+      url: any = 'http://localhost:3000/pdf/';
+
+  this._HTTP
+  .get(url, { responseType: 'arraybuffer' })
+  .subscribe((data: any) => {
+     // If the request was successful notify the user
+    //  this.displayNotification(name + ' was successfully created');
+    window.open(URL.createObjectURL(
+        new Blob([data], {type: 'application/pdf'})));
+    console.log('succes');
+  },
+  (error: any) => {
+     console.dir(error);
+  });
+}
+
 sendPayment(eventId) {
   console.log(eventId);
-  return this.http.post('http://52.40.161.160:3000/pay/' + eventId, '')
+  return this.http.post('http://localhost:3000/pay/' + eventId, '')
     .map(res => res.json());
   }
 
@@ -92,7 +116,6 @@ sendPayment(eventId) {
   this.sendPayment(eventId).subscribe((payment) => {
    for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === 'approval_url') {
-                  console.log(payment.links[i].href);
                   window.location.href = payment.links[i].href;
                 }
             }

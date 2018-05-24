@@ -1,7 +1,8 @@
 const paypal =  require('paypal-rest-sdk');
 const Event = require('../models/event');
 const pdf = require('./pdfService');
-
+const mail = require('./mailService');
+const mailtemplate = require('./templates');
 //CONFIGURATION
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
@@ -27,7 +28,7 @@ module.exports.createPayment = (req,res) =>{
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://52.40.161.160:3000/pay/execute",
+            "return_url": "http://localhost:3000/pay/execute",
             "cancel_url": "http://52.40.161.160:3000/pay/cancel"
         },
         "transactions": [{
@@ -88,7 +89,21 @@ module.exports.executePayment = (req,res,next) => {
             console.log(JSON.stringify(payment));
             res.status(200);
             //TO DO CREATE PDF TICKET and send to your email
-            // pdf.generatePdf('mac','aa','aa','2019');
+            console.log('asas');
+            pdf.generatePdf();
+            let mailOptions = {
+                from: '"Bandz administration" <maciej.czarnota@gmail.com>', // sender address
+                to:  'maciej.czarnota@gmail.com', // list of receivers
+                subject: 'maciej.czarnota@gmail.com' + ', welcome to BANDZ!', // Subject line
+                text: 'Hello world?', // plain text body
+                html: mail, // html body
+                attachments: [{
+                    filename: 'ticket.pdf',
+                    path: './../pdfs/Maciej1.pdf',
+                    contentType: 'application/pdf'
+                  }]
+            };
+            mail.generateEmail(mailOptions, mailtemplate.pdfTemplate());
             res.redirect('http://52.40.161.160/#/main/');
         }
     });

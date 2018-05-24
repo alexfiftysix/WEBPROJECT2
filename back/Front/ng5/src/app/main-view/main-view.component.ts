@@ -1,6 +1,8 @@
 import {Component, OnInit, Input,  ViewChild, ViewEncapsulation } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
+import { Http } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {MatDialogRef} from '@angular/material';
 import { MAT_DIALOG_DATA} from '@angular/material';
 import { AgmCoreModule } from '@agm/core';
@@ -87,7 +89,12 @@ export class MainViewComponent  implements OnInit {
     // Checks if the window is active
     return this.inputActive;
   }
- constructor( private router: Router, private eventService: EventsDataService, private bandsService: BandsDataService) {
+ constructor(
+   private router: Router,
+   private eventService: EventsDataService,
+   private bandsService: BandsDataService,
+   private _HTTP: HttpClient
+  ) {
  }
   ngOnInit() {
     this.getEvents('');

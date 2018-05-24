@@ -8,7 +8,6 @@ export class Message {
         public isBroadcast = false,
     ) { }
 }
-
 @Component({
     selector: 'app-chat-box',
     templateUrl: './chat-box.component.html',

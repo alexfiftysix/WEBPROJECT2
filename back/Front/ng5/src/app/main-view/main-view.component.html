@@ -51,6 +51,7 @@
       [band]="band" *ngFor="let band of bands"></app-band-card>
   </section>
   <aside class="mapContainer"[class.fixed]="fixed">
+
       <agm-map (mapReady)="onMapReady($event)"
         [zoom]=8
         [minZoom]=2

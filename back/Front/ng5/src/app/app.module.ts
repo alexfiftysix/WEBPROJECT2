@@ -9,6 +9,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {AgmCoreModule} from '@agm/core';
 import {AuthService} from '../services/auth.service';
 import { AuthGuard} from '../guards/auth.guard';
+import { HttpClientModule } from '@angular/common/http';
 /** Material IO imports */
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
@@ -111,6 +112,7 @@ import { SafeUrlPipe } from '../../src/pipes/safe-url.pipe';
     MatSliderModule,
     SliderModule,
     MatProgressBarModule,
+    HttpClientModule,
     StarRatingModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDafSVEi1nNB5qre5tuA57GK08m6ybLdqw'

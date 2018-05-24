@@ -10,7 +10,7 @@ import {URLSearchParams} from '@angular/http';
 export class EventsDataService {
 
   private _eventsURL = 'http://52.40.161.160:3000/events/';
-  private perPage: string = '&per_page=10';
+  private perPage: String = '&per_page=10';
 constructor(private http: Http) {}
 getEvents(searchQuery: string) {
   // get all the Events from the server

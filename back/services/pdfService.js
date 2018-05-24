@@ -1,55 +1,91 @@
-const pdf = require('pdfkit');
+const pdfKit = require('pdfkit');
 const fs = require('fs');
 
 
-exports.generatePdf = function (eventName,venueName,venueAddress, date) {
+exports.generatePdf = (req,res) =>{
 
-let myDoc = new pdf;
-myDoc.pipe(fs.createWriteStream('ticket.pdf'));
+/* Create a pdfKit object that defines the following properties:
+    *
+    * 1. Document orientation
+    * 2. Document margins
+    * 3. Document metadata (Title, Author, Subject and Date last modified)
+    */
+   var doc 				= 	new pdfKit({ layout : 'portrait', margins: { top: 50, bottom: 50, left: 72, right: 72 }, info: {
+    Title 	: 'My fabulous document',
+    Author 	: 'Saints at Play Limited',
+    Subject 	: 'Demonstrating PDF Kit abilities',
+    ModDate   : new Date(Date.now()).toLocaleString()
+}}),
 
-// Set a title 
-myDoc.fontSize(25).text('Bandz presents', 100, 100)
-.moveDown(0.5);
-//Set event name
-myDoc.fontSize(35).text(eventName)
-.moveDown();
-// Set the venue name 
-myDoc.fontSize(15)
-.text(venueName, {
-    width: 410,
-    align: 'center'
-}).moveDown(0.5);
-//Set venue adress
-myDoc.fontSize(12)
-.text(venueAddress, {
-    width: 410,
-    align: 'center'
-}).moveDown();
+    /* Retrieve the values for the MongoDB document - from the
+       posted data within the Ionic mobile application - that we
+       wish to embed within the generated PDF document */
+     name 			=	'Maciej1'
+    description 		=	'Cos opis',
+    displayed 		=	'yep',
+    date 			=	Date.now();
 
-//set general admission
-myDoc.fontSize(15)
-.text('GENERAL ADMISSION', {
-    width: 410,
-    align: 'center'
-}).moveDown(0.5);
-myDoc.fontSize(13)
-.text('AGES 21 AND OVER', {
-    width: 410,
-    align: 'center'
-}).moveDown(0.5);
-//set date event
-myDoc.fontSize(15)
-.text(date, {
-    width: 410,
-    align: 'center'
-}).moveDown();
-//set no refunds
-myDoc.fontSize(15)
-.text('NO REFUNDS/NO EXCHANGES', {
-    width: 410,
-    align: 'center'
-}).moveDown();
-myDoc.image('../uploads/band2.jpg', 400, 80, {width: 200});
-myDoc.end();
-res.download('ticket.pdf');
-}
+
+/* Replace any spaces within the name value with dashes instead */
+name 				= name.replace(' ', '-');
+
+
+/* Define the directory location and name of the generated PDF document */
+doc.pipe(fs.createWriteStream('pdfs/' + name + '.pdf'));
+
+doc.text('asasasas');
+/* Embed image within the document as follows:
+   image(image to be embedded, x axis position, y axis position, fit image to specified dimensions) */
+// doc.image(thumbnail, 25, 25, {
+//    fit 		: [320, 240]
+// });
+
+
+/* Embed specific font, define font size and add text as follows:
+   text(value to be displayed, x axis position, y axis position) */
+// doc.font('fonts/Diavlo_bold.otf')
+// .fontSize(18)
+// .text(name, 25, 285);
+
+
+// /* Embed specific font, define font size and add text as follows:
+//    text(value to be displayed, x axis position, y axis position) */
+// doc.font('fonts/delicious_bold.otf')
+// .fontSize(16)
+// .text(description, 25, 310);
+
+/* Finalise the PDF */
+doc.end();
+
+
+
+
+
+
+
+  // var doc;
+
+  // doc = new pdfKit();
+
+  // // Set some headers
+  // res.statusCode = 200;
+  // res.setHeader('Content-type', 'application/pdf');
+  // res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // // Header to force download
+  // res.setHeader('Content-disposition', 'attachment; filename=Maciej.pdf');
+  // doc.info['Title'] = 'Test Document';
+  // doc.pipe(res);
+
+  // doc.addPage().fontSize(25).text('Here is some vector graphics...', 100, 100);
+
+  // doc.save().moveTo(100, 150).lineTo(100, 250).lineTo(200, 250).fill('#FF3300');
+
+  // doc.scale(0.6).translate(470, -380).path('M 250,75 L 323,301 131,161 369,161 177,301 z').fill('red', 'even-odd').restore();
+
+  // doc.addPage().fillColor('blue').text('Here is a link!', 100, 100).underline(100, 100, 160, 27, {
+  //   color: '#0000FF'
+  // }).link(100, 100, 160, 27, 'http://google.com/');
+
+  // doc.end();
+};
