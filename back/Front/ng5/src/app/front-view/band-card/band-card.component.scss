@@ -4,6 +4,9 @@
 h1{
   color: $color-lighter;
 }
+mat-card{
+  margin-bottom: 1em;
+}
 
 .suggestions {
   width: 100%;
@@ -40,14 +43,20 @@ p{
 }
 
 .bandImage {
-  width: 200px;
   height: 200px;
+  width: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  img {
+    object-fit: cover;
+  }
+  
+}
+.bandImage:hover{
+  opacity: 0.8;
 }
 
-img {
-  width: inherit;
-  height: inherit;
-}
 
 .hotItem {
   position: absolute;
@@ -70,33 +79,30 @@ img {
 .ratingItem {
   width: 50px;
   height: 20px;
-  display: inline;
+  display: flex;
   position: relative;
-  left: 1em;
-  // border: 1px red solid;
 }
-
-.ratingNumber {
-  display: inline-block;
+mat-card-content{
+  margin-top: 0.5em;
+  line-height: 1.8;
 }
-
 .price {
   font-weight: bold;
 }
 
+.bandGenre{
+  display: inline;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+}
  .bandName, .bandAddress {
   display: inline;
   font-weight: bold;
-}
-
-.playIcon {
-  width: 4.5em;
-  height: 4.5em;
-}
-
-.playIcon:hover {
-  opacity: 0.5;
-  cursor: pointer;
+  padding:0;
+  margin:0;
+  
 }
 
   img.mat-card-img{

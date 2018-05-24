@@ -3,20 +3,18 @@
               <img mat-card-image src="{{band.image}}" alt="{{band.name}}">
             </div>
             <mat-card-content>
-                <mat-card-subtitle class="bandName">{{band.genre}}</mat-card-subtitle><br>
+                <mat-card-subtitle class="bandGenre">{{band.genre}}</mat-card-subtitle><br>
                 <mat-card-subtitle class="bandAddress">{{band.city}}</mat-card-subtitle><br>
                 <mat-card-title class="bandName">{{band.name}}</mat-card-title>
                 <mat-card-title class="bandName">
                 </mat-card-title>
-                <mat-card-actions>
                     <div class="ratingItem">
                         <!-- Manual for angular-star-rating and how to do it -->
                         <!-- https://github.com/BioPhoton/angular-star-rating/wiki/Property-bindings#label-modifier -->
                         <!-- You need to download the angular-star-rating@3.0.8 i css-star-rating@1.1.2 -->
                         <star-rating-comp [size]="'small'" [readOnly]="true"[hoverEnabled]="false"[showHalfStars]="true"class="ratingImage"[starType]="'svg'" [rating]="5"></star-rating-comp>
-                        <p class="ratingNumber"> {{band.rating}}</p>
-                        <button> Play </button>
+                        <!-- <p class="ratingNumber"> {{band.rating}}</p>
+                        <button> Play </button> -->
                 </div>
-                </mat-card-actions>
             </mat-card-content>
         </mat-card>

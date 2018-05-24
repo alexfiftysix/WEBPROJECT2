@@ -1,13 +1,14 @@
 
 <mat-card appCardHover class="suggestionsBox">
-
+    <div class="Image">
         <img mat-card-image src="{{event.image}}" alt="{{event.name}}">
+    </div>
     <mat-card-content class="contents">
-        <mat-card-subtitle class="venueName">{{event.venueName}}</mat-card-subtitle>
-        <mat-card-subtitle class="venueAddress">{{event.location.city}}</mat-card-subtitle>
+        <mat-card-subtitle class="venueName">{{event.venueName}},</mat-card-subtitle>
+        <mat-card-subtitle class="venueAddress">{{event.location.city}}&nbsp;&bull;</mat-card-subtitle>
         <mat-card-subtitle class="venueName">{{event.date }}</mat-card-subtitle><br>
         <mat-card-title class="eventName">{{event.name}}</mat-card-title>
-        <mat-card-title class="price">{{event.price| currency}}</mat-card-title>
+        <mat-card-title class="price">{{event.price| currency:'AUD':true:'0.0-0'}}</mat-card-title>
     </mat-card-content>
 </mat-card>
 
