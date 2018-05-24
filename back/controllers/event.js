@@ -30,6 +30,7 @@ exports.eventsGetAll = (req, res, next) => {
                         venueName: doc.venueName,
                         date: moment(doc.date).format('L'),
                         image: "http://52.40.161.160:3000/" + doc.image,
+                        description: doc.description,
                         request: {
                             type: "GET",
                             URL: "http://52.40.161.160:3000/events/" + doc._id
@@ -62,6 +63,7 @@ exports.createEvent = (req, res, next) => {
                 venueName: req.body.venueName,
                 image: req.file.path,
                 date: req.body.date,
+                description: req.body.description,
                 location: {
                     city: result[0].city,
                     coordinates: [result[0].latitude, result[0].longitude]
@@ -101,7 +103,7 @@ exports.createEvent = (req, res, next) => {
 exports.getOneEvent = (req, res, next) => {
     const id = req.params.EventId;
     Event.findById(id)
-        .select('headlinerId name price location venueName date image ')
+        .select('headlinerId name price location venueName date image description')
         .exec()
         .then(doc => {
             console.log(doc);

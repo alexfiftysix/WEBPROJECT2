@@ -1,0 +1,44 @@
+<main>
+  <header>
+    <h1 mat-dialog-title>Create new Event</h1>
+  </header>
+
+  <mat-dialog-actions>
+    <mat-form-field floatLabel>
+      <mat-label>Event Name</mat-label>
+      <input [(ngModel)]="name" type="text" matInput placeholder="Event name" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Venue</mat-label>
+      <input [(ngModel)]="venue" type="text" matInput placeholder="Where the event is held" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Location</mat-label>
+      <input [(ngModel)]="location" type="text" matInput placeholder="Where the event is held (City)" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Price</mat-label>
+      <input [(ngModel)]="price" type="text" matInput placeholder="Ticket price in dollars" required>
+      <!--TODO: put a dollar sign in-->
+    </mat-form-field>
+
+    <mat-label for="date">Date</mat-label>
+    <input type="date" [ngModel]="date | date:'yyyy-MM-dd'" (ngModelChange)="date = $event">
+
+    <mat-label for="banner">Event Image</mat-label>
+    <input id="banner" type="file" name="banner" (change)="handleFileInput($event.target.files)">
+
+    <mat-form-field floatLabel>
+      <mat-label>Description
+      </mat-label>
+      <textarea [(ngModel)]="description" type="text" matInput
+                placeholder="Tell us something interesting about your event" required></textarea>
+    </mat-form-field>
+
+  </mat-dialog-actions>
+
+  <button mat-raised-button (click)="create()">Confirm</button>
+</main>

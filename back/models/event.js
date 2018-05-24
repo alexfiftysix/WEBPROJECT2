@@ -14,7 +14,8 @@ const eventSchema = mongoose.Schema({
         coordinates: {type: [Number]}
     },
     date: {type: Date, required: true},
-    image: {type: String, required: true}
+    image: {type: String, required: true},
+    description: {type: String, required: false}
 });
 
 // db.events.createIndex( { "locationName" : 1 , "name" : 1, "venueName": 1},

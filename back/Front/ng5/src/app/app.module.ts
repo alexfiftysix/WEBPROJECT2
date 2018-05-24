@@ -66,6 +66,7 @@ import { DialogTestComponent } from './dialog-test/dialog-test.component';
 import { CreateNewBandComponent } from './create-new-band/create-new-band.component';
 import { ProfileDoesNotExistComponent } from './profile-does-not-exist/profile-does-not-exist.component';
 import { ProfileDeleteComponent } from './profile-delete/profile-delete.component';
+import { CreateEventComponent } from './create-event/create-event.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { ProfileDeleteComponent } from './profile-delete/profile-delete.componen
     CreateNewBandComponent,
     ProfileDoesNotExistComponent,
     ProfileDeleteComponent,
+    CreateEventComponent,
   ],
   imports: [
     BrowserModule,
@@ -136,7 +138,8 @@ import { ProfileDeleteComponent } from './profile-delete/profile-delete.componen
     DialogTestComponent,
     CreateNewBandComponent,
     ProfileDoesNotExistComponent,
-    ProfileDeleteComponent
+    ProfileDeleteComponent,
+    CreateEventComponent
   ],
   providers: [
     MatDatepickerModule,

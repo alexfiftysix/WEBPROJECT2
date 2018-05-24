@@ -11,6 +11,7 @@ import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 import {CreateNewBandComponent} from '../create-new-band/create-new-band.component';
 import {ProfileDoesNotExistComponent} from "../profile-does-not-exist/profile-does-not-exist.component";
 import {ProfileDeleteComponent} from "../profile-delete/profile-delete.component";
+import {CreateEventComponent} from "../create-event/create-event.component";
 
 @Component({
   selector: 'app-profile',
@@ -73,25 +74,22 @@ export class BandProfileComponent implements OnInit {
 
   }
 
+  /**
+   * Gets all events by this artist into the events array
+   */
   getEvents(query: string) {
     this.searching = true;
     let allEvents;
     return this.eventService.getEvents(query).subscribe(data => {
         allEvents = data.events;
-        console.log(data);
       }, error => console.log(error),
       () => {
         this.searching = false;
-        console.log('Events fetched completed');
         allEvents.forEach(event => {
-          console.log(event);
-          console.log(event['_id']);
-          console.log(event['headlinerId']);
-          if (event['headlinerId'] == this.bandId){
+          if (event['headlinerId'] == this.bandId) {
             this.events.push(event);
           }
         });
-        console.log(this.events);
       });
   }
 
@@ -163,7 +161,6 @@ export class BandProfileComponent implements OnInit {
     });
   }
 
-
   deleteProfile() {
     this.dialog.open(ProfileDeleteComponent, {
       data: {
@@ -179,5 +176,13 @@ export class BandProfileComponent implements OnInit {
    */
   sanitizeImageLink(link: string) {
     return link.replace(/\\/g, '/').replace(/ /g, '%20');
+  }
+
+  createEvent() {
+    this.dialog.open(CreateEventComponent, {
+      data: {
+        id: this.bandId
+      }
+    });
   }
 }

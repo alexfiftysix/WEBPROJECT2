@@ -44,10 +44,13 @@
       </div>
       <button mat-raised-button (click)="buyTickets(event?._id)">Buy tickets {{event?.price|currency}}</button>
     </div>
+    <p *ngIf="events.length == 0">This band has no upcoming gigs</p>
   </ng-container>
   <app-chat-box *ngIf=isChatBoxActive></app-chat-box>
   <button mat-raised-button (click)="createNew()">Create new band</button>
   <button mat-raised-button (click)="noProfile()">noProfile</button>
   <button mat-raised-button (click)="deleteProfile()">Delete Band</button>
+  <button mat-raised-button (click)="createEvent()">Create Event</button>
 </main>
+
 

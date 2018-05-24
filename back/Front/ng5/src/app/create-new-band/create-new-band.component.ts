@@ -72,18 +72,6 @@ export class CreateNewBandComponent implements OnInit {
     body.append('music', this.extractSpotifyLink(this.spotifyPlayerLink));
     body.append('rating', '0');
 
-
-    // const body = {
-    //   name: this.name,
-    //   genre: this.genre,
-    //   price: this.price,
-    //   contactNumber: this.contactNumber,
-    //   location: this.location,
-    //   bio: this.bio,
-    //   image: this.banner,
-    //   spotifyPlayerLink: this.extractSpotifyLink(this.spotifyPlayerLink) //todo: Extract proper link
-    // };
-
     this.httpClient.post(url, body)
       .subscribe(data => {
           console.log(data);
