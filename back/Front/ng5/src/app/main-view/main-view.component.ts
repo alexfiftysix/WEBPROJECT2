@@ -93,7 +93,6 @@ export class MainViewComponent implements OnInit {
     // Checks if the window is active
     return this.inputActive;
   }
-<<<<<<< HEAD
  constructor(
    private router: Router,
    private eventService: EventsDataService,
@@ -101,12 +100,6 @@ export class MainViewComponent implements OnInit {
    private _HTTP: HttpClient
   ) {
  }
-=======
-
-  constructor(private router: Router, private eventService: EventsDataService, private bandsService: BandsDataService) {
-  }
-
->>>>>>> 18825f002b64b2b2f5fd3015d9a0f96ba9a8157f
   ngOnInit() {
     this.getEvents('');
     this.getBands('');

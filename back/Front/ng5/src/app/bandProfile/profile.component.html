@@ -44,7 +44,7 @@
       </div>
       <button mat-raised-button (click)="buyTickets(event?._id)">Buy tickets {{event?.price|currency}}</button>
     </div>
-    <p *ngIf="events.length == 0">This band has no upcoming gigs</p>
+    <!-- <p *ngIf="events.length == 0">This band has no upcoming gigs</p> -->
   </ng-container>
   <app-chat-box *ngIf=isChatBoxActive></app-chat-box>
   <button mat-raised-button (click)="createNew()">Create new band</button>

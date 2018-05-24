@@ -33,8 +33,6 @@ export class BandProfileComponent implements OnInit {
   bandId: string;
   bandCampLink = 'https://bandcamp.com/EmbeddedPlayer/album=77046358/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/';
   band;
-  events = [];
-  searching: Boolean = false;
   isBand = true;
   isVenue = false;
   rateDropDown = false;
@@ -44,7 +42,7 @@ export class BandProfileComponent implements OnInit {
   state = 'normal';
   image: string;
   spotifyPlayerLink = 'https://open.spotify.com/embed?uri=spotify:artist:36QJpDe2go2KgaRleHCDTp';
-  gigs = {};
+  gigs = [];
 
   constructor(
     private bandService: BandsDataService,
@@ -76,16 +74,14 @@ export class BandProfileComponent implements OnInit {
    * Gets all events by this artist into the events array
    */
   getEvents(query: string) {
-    this.searching = true;
     let allEvents;
     return this.eventService.getEvents(query).subscribe(data => {
         allEvents = data.events;
       }, error => console.log(error),
       () => {
-        this.searching = false;
         allEvents.forEach(event => {
           if (event['headlinerId'] === this.bandId) {
-            this.events.push(event);
+            this.gigs.push(event);
           }
         });
       });
@@ -123,7 +119,6 @@ export class BandProfileComponent implements OnInit {
         this.band = data;
       }, error => console.log(error),
       () => {
-        this.searching = false;
         console.log('Band ' + bandId + ' fetch completed');
         this.image = this.sanitizeImageLink(this.band['image']);
         console.log(this.image);
