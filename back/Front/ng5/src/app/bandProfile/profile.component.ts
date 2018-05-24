@@ -6,17 +6,12 @@ import {BandsDataService} from '../front-view/suggestions/bands.service';
 import {ChatBoxComponent} from './chat-box.component';
 import {trigger, state, style, transition, animate, keyframes} from '@angular/animations';
 import {Http, Response} from '@angular/http';
-<<<<<<< HEAD
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-=======
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
-
 import {CreateNewBandComponent} from '../create-new-band/create-new-band.component';
-import {ProfileDoesNotExistComponent} from "../profile-does-not-exist/profile-does-not-exist.component";
-import {ProfileDeleteComponent} from "../profile-delete/profile-delete.component";
-import {CreateEventComponent} from "../create-event/create-event.component";
-
->>>>>>> 18825f002b64b2b2f5fd3015d9a0f96ba9a8157f
+import {ProfileDoesNotExistComponent} from '../profile-does-not-exist/profile-does-not-exist.component';
+import {ProfileDeleteComponent} from '../profile-delete/profile-delete.component';
+import {CreateEventComponent} from '../create-event/create-event.component';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -58,10 +53,10 @@ export class BandProfileComponent implements OnInit {
     public authService: AuthService,
     private eventService: EventsDataService,
     private http: Http,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _HTTP: HttpClient
     // @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-  }
+  ) {}
 
   public ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -75,7 +70,6 @@ export class BandProfileComponent implements OnInit {
         window.scrollTo(0, 0);
       });
     });
-
   }
 
   /**
@@ -90,7 +84,7 @@ export class BandProfileComponent implements OnInit {
       () => {
         this.searching = false;
         allEvents.forEach(event => {
-          if (event['headlinerId'] == this.bandId) {
+          if (event['headlinerId'] === this.bandId) {
             this.events.push(event);
           }
         });
@@ -106,29 +100,11 @@ export class BandProfileComponent implements OnInit {
     } else {
       this.isChatBoxActive = !this.isChatBoxActive;
     }
-
   }
 
   rate() {
     // console.log('Rate');
     this.rateDropDown = !this.rateDropDown;
-  }
-
-<<<<<<< HEAD
-  constructor(private bandService: BandsDataService,
-      private activedRoute: ActivatedRoute,
-      private router: Router,
-      public authService: AuthService,
-      private eventService: EventsDataService,
-      private http: Http,
-      private _HTTP: HttpClient
-    ) {
-=======
-  sendPayment(eventId) {
-    console.log(eventId);
-    return this.http.post('http://52.40.161.160:3000/pay/' + eventId, '')
-      .map(res => res.json());
->>>>>>> 18825f002b64b2b2f5fd3015d9a0f96ba9a8157f
   }
 
   buyTickets(eventId) {
@@ -151,13 +127,12 @@ export class BandProfileComponent implements OnInit {
         console.log('Band ' + bandId + ' fetch completed');
         this.image = this.sanitizeImageLink(this.band['image']);
         console.log(this.image);
-        if (this.band['music'] != null && this.band['music'] != '') {
+        if (this.band['music'] != null && this.band['music'] !== '') {
           this.spotifyPlayerLink = this.band['music'];
         }
-      }
-    );
+      });
+    }
 
-<<<<<<< HEAD
 generatePDF() {
   const name = 'Maciej';
   const description = 'alsla';
@@ -186,21 +161,9 @@ sendPayment(eventId) {
     .map(res => res.json());
   }
 
-  buyTickets(eventId) {
-  this.sendPayment(eventId).subscribe((payment) => {
-   for (let i = 0; i < payment.links.length; i++) {
-                if (payment.links[i].rel === 'approval_url') {
-                  window.location.href = payment.links[i].href;
-                }
-            }
-   });
-=======
-  }
-
   toggleContentGigs() {
     this.showContent = !this.showContent;
     this.showGigs = !this.showGigs;
->>>>>>> 18825f002b64b2b2f5fd3015d9a0f96ba9a8157f
   }
 
   createNew() {
@@ -220,9 +183,9 @@ sendPayment(eventId) {
       data: {
         id: this.bandId,
         name: this.band['name'],
-        url: 'http://52.40.161.160:3000/bands/' //todo: Get sensibly
+        url: 'http://52.40.161.160:3000/bands/' // todo: Get sensibly
       }
-    })
+    });
   }
 
   /**
