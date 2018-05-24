@@ -1,0 +1,39 @@
+<main *ngIf="!waiting">
+  <header>
+    <h1 mat-dialog-title>Edit Band Text</h1>
+  </header>
+
+  <mat-dialog-actions>
+    <mat-form-field floatLabel>
+      <mat-label>Name</mat-label>
+      <input [(ngModel)]="name" type="text" matInput placeholder="Band name" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Location</mat-label>
+      <input [(ngModel)]="location" type="text" matInput placeholder="Home town" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Genre</mat-label>
+      <input [(ngModel)]="genre" type="text" matInput placeholder="Genre" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Spotify Artist or Album url</mat-label>
+      <input [(ngModel)]="spotifyPlayerLink" type="text" matInput placeholder="Spotify artist or album page url (Eg. https://open.spotify.com/album/0h7j3LJHgsg5B66SWQxDVC" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Bio</mat-label>
+      <textarea [(ngModel)]="bio" type="text" matInput placeholder="Tell us something interesting about your band" required></textarea>
+    </mat-form-field>
+
+  </mat-dialog-actions>
+
+  <button mat-raised-button (click)="confirmSelection()">Confirm</button>
+</main>
+
+<main *ngIf="waiting">
+  <p>Editing band now, please wait...</p>
+</main>
