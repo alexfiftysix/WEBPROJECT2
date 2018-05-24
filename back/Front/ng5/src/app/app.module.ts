@@ -53,15 +53,22 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, HttpModule } from '@angular/http';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import {HttpClientModule} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { StarRatingModule } from 'angular-star-rating';
 import { CardHoverDirective } from '../directives/card-hover.directive';
 import {SliderModule} from 'primeng/slider';
-import { EventSearchFilter } from '../../src/pipes/order-by-date.pipe';
+import { EventSearchFilter } from '../pipes/order-by-date.pipe';
 import * as moment from 'moment';
 import { ChatBoxComponent } from './bandProfile/chat-box.component';
-import { SafeUrlPipe } from '../../src/pipes/safe-url.pipe';
+import { SafeUrlPipe } from '../pipes/safe-url.pipe';
+import { DialogTestComponent } from './dialog-test/dialog-test.component';
+import { CreateNewBandComponent } from './create-new-band/create-new-band.component';
+import { ProfileDoesNotExistComponent } from './profile-does-not-exist/profile-does-not-exist.component';
+import { ProfileDeleteComponent } from './profile-delete/profile-delete.component';
+import { CreateEventComponent } from './create-event/create-event.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +93,12 @@ import { SafeUrlPipe } from '../../src/pipes/safe-url.pipe';
     CardHoverDirective,
     EventSearchFilter,
     ChatBoxComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    DialogTestComponent,
+    CreateNewBandComponent,
+    ProfileDoesNotExistComponent,
+    ProfileDeleteComponent,
+    CreateEventComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,7 +108,6 @@ import { SafeUrlPipe } from '../../src/pipes/safe-url.pipe';
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
-    MatDialogModule,
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -104,9 +115,10 @@ import { SafeUrlPipe } from '../../src/pipes/safe-url.pipe';
     ReactiveFormsModule,
     PasswordStrengthBarModule,
     MatDividerModule,
+    HttpModule,
+    HttpClientModule,
     MatSnackBarModule,
     MatDatepickerModule,
-    HttpModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatSliderModule,
@@ -125,6 +137,11 @@ import { SafeUrlPipe } from '../../src/pipes/safe-url.pipe';
     ReactiveFormsModule
   ],
   entryComponents: [
+    DialogTestComponent,
+    CreateNewBandComponent,
+    ProfileDoesNotExistComponent,
+    ProfileDeleteComponent,
+    CreateEventComponent
   ],
   providers: [
     MatDatepickerModule,
@@ -133,8 +150,11 @@ import { SafeUrlPipe } from '../../src/pipes/safe-url.pipe';
     BandsDataService,
     EventsDataService,
     AuthService,
-    AuthGuard],
-  bootstrap: [AppComponent]
+    AuthGuard
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 
 

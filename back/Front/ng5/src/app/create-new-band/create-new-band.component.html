@@ -1,0 +1,55 @@
+<main *ngIf="!uploading">
+  <header>
+    <h1 mat-dialog-title>Edit profile</h1>
+    <p>All fields marked with '*' are required</p>
+  </header>
+
+  <form #f="ngForm" action="{{apiUrl}}">
+    <mat-form-field floatLabel>
+      <mat-label>Name</mat-label>
+      <input name="name" [(ngModel)]="name" type="text" matInput placeholder="Band name" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Genre</mat-label>
+      <input [(ngModel)]="genre" name="genre" type="text" matInput placeholder="Genre" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Price</mat-label>
+      <input [(ngModel)]="price" name="price" min="0" matInput placeholder="Band fee" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Contact Number</mat-label>
+      <input [(ngModel)]="contactNumber" name="contactNumber" min="0" matInput
+             placeholder="Contact number" required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Location</mat-label>
+      <input [(ngModel)]="location" name="location" type="text" matInput placeholder="Home town" required>
+    </mat-form-field>
+
+    <label for="banner">Band Image</label>
+    <input id="banner" type="file" name="banner" (change)="handleFileInput($event.target.files)">
+    <!--<input [(ngModel)]="banner" name="banner" id="banner" type="file" placeholder="Banner image url"-->
+           <!--(change)="handleFileInput($event.target.files)">-->
+
+    <mat-form-field floatLabel>
+      <mat-label>Spotify Artist or Album url</mat-label>
+      <input name="spotifyPlayerLink" [(ngModel)]="spotifyPlayerLink" matInput required>
+    </mat-form-field>
+
+    <mat-form-field floatLabel>
+      <mat-label>Bio</mat-label>
+      <textarea [(ngModel)]="bio" name="bio" type="text" matInput
+                placeholder="Tell us something interesting about your band"
+                required></textarea>
+    </mat-form-field>
+    <button mat-raised-button (click)="create()">Create</button>
+  </form>
+</main>
+<main *ngIf="uploading">
+  <p>Uploading your profile now... Please wait</p>
+</main>

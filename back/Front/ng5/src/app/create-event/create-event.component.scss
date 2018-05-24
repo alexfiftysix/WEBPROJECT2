@@ -1,0 +1,14 @@
+main{
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+}
+
+mat-dialog-actions{
+  display: flex;
+  flex-direction: column;
+}
+
+textarea{
+  height: 200px;
+}
