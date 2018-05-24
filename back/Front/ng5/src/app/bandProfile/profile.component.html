@@ -45,9 +45,7 @@
     <p *ngIf="gigs.length == 0">This band has no upcoming gigs</p>
   </ng-container>
   <app-chat-box *ngIf=isChatBoxActive></app-chat-box>
-  <button mat-raised-button (click)="createNew()">Create new band</button>
   <button mat-raised-button (click)="deleteProfile()">Delete Band</button>
   <button mat-raised-button (click)="createEvent()">Create Event</button>
+  <button mat-raised-button (click)="editText()">Edit text</button>
 </main>
-
-

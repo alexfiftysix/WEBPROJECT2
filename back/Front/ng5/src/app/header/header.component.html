@@ -3,8 +3,10 @@
     <li class="Logo"><a href="/#/"><img src="../../assets/images/bandzLogo.png"></a></li>
   </ul>
   <ul>
-    <li *ngIf="!authService.loggedIn()"><a (click)="openSubmitForm()" >Sign up</a></li>
-    <li *ngIf="!authService.loggedIn()"><a (click)="openLoginForm()" >Log in</a></li>
-    <li *ngIf="authService.loggedIn()"><a href="#"  (click)="onLogout()" >Log out</a></li>
+    <li *ngIf="!authService.loggedIn()"><a (click)="openSubmitForm()">Sign up</a></li>
+    <li *ngIf="!authService.loggedIn()"><a (click)="openLoginForm()">Log in</a></li>
+    <li *ngIf="authService.loggedIn()"><a href="#/main">Find bands & events</a></li>
+    <li *ngIf="authService.loggedIn()"><a href="#" (click)="createBand()">Create a band</a></li>
+    <li *ngIf="authService.loggedIn()"><a href="#" (click)="onLogout()">Log out</a></li>
   </ul>
 </header>

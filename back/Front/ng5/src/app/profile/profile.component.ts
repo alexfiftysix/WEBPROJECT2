@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   isBand = true;
   isVenue = false;
   baseUrl = 'http://ec2-54-191-122-200.us-west-2.compute.amazonaws.com:3000/bands/';
+  bandName: string;
 
   id = '';
   title = '';
@@ -73,6 +74,7 @@ export class ProfileComponent implements OnInit {
         this.httpClient.get(bandUrl).subscribe(data => {
           console.log(data);
           this.spotifyPlayerLink = data['music'];
+          this.bandName = data['name'];
         })
 
       }, error1 => {

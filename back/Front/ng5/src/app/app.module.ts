@@ -67,6 +67,7 @@ import { CreateNewBandComponent } from './create-new-band/create-new-band.compon
 import { ProfileDoesNotExistComponent } from './profile-does-not-exist/profile-does-not-exist.component';
 import { ProfileDeleteComponent } from './profile-delete/profile-delete.component';
 import { CreateEventComponent } from './create-event/create-event.component';
+import { EditBandTextComponent } from './edit-band-text/edit-band-text.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { CreateEventComponent } from './create-event/create-event.component';
     ProfileDoesNotExistComponent,
     ProfileDeleteComponent,
     CreateEventComponent,
+    EditBandTextComponent,
   ],
   imports: [
     BrowserModule,
@@ -140,7 +142,8 @@ import { CreateEventComponent } from './create-event/create-event.component';
     CreateNewBandComponent,
     ProfileDoesNotExistComponent,
     ProfileDeleteComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    EditBandTextComponent
   ],
   providers: [
     MatDatepickerModule,

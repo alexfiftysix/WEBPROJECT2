@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {EventsDataService} from '../front-view/suggestions/events.service';
 import {Router, ActivatedRoute, NavigationEnd, Params} from '@angular/router';
@@ -7,10 +7,11 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/an
 import {Http} from '@angular/http';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {MatDialog} from '@angular/material';
-import {CreateNewBandComponent} from '../create-new-band/create-new-band.component';
+
 import {ProfileDoesNotExistComponent} from '../profile-does-not-exist/profile-does-not-exist.component';
 import {ProfileDeleteComponent} from '../profile-delete/profile-delete.component';
 import {CreateEventComponent} from '../create-event/create-event.component';
+import {EditBandTextComponent} from "../edit-band-text/edit-band-text.component";
 
 @Component({
   selector: 'app-profile',
@@ -166,10 +167,6 @@ export class BandProfileComponent implements OnInit {
     this.showGigs = !this.showGigs;
   }
 
-  createNew() {
-    const dialogRef = this.dialog.open(CreateNewBandComponent);
-  }
-
   noProfile() {
     this.dialog.open(ProfileDoesNotExistComponent, {
       data: {
@@ -201,5 +198,23 @@ export class BandProfileComponent implements OnInit {
         id: this.bandId
       }
     });
+  }
+
+  editText() {
+    const dialogRef = this.dialog.open(EditBandTextComponent, {
+      data: {
+        id: this.bandId,
+        name: this.band['name'],
+        genre: this.band['genre'],
+        location: this.band['city'],
+        spotifyPlayerLink: this.spotifyPlayerLink,
+        bio: this.band['description']
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      this.getBand(this.bandId);
+    });
+
   }
 }

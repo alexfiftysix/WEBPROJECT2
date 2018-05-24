@@ -1,4 +1,4 @@
-<main *ngIf="!deleted">
+<main *ngIf="showMain()">
   <p>
     Are you sure you want to delete {{name}}?
   </p>
@@ -7,6 +7,10 @@
     <button mat-raised-button (click)="cancel()">Cancel</button>
     <button mat-raised-button (click)="deleteProfile()">Delete</button>
   </div>
+</main>
+
+<main *ngIf="deleting">
+  <p>Deleting...</p>
 </main>
 
 <main *ngIf="deleted">

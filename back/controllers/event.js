@@ -122,7 +122,7 @@ exports.getOneEvent = (req, res, next) => {
 
 //DELETE INDIVIDUAL EVENT
 exports.deleteOneEvent = (req, res, next) => {
-    const id = req.params.eventId;
+    const id = req.params.EventId;
     //remove any event that has this id
     Event.remove({_id: id})
         .exec()
