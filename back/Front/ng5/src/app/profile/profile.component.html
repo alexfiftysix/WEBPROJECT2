@@ -7,7 +7,7 @@
       <h2>${{price}}</h2>
     </div>
     <div class="buttons">
-      <button mat-raised-button (click)="buyTickets()">Buy Tickets</button>
+      <button mat-raised-button (click)="buyTickets()">Buy tickets {{event?.price|currency}}</button>
     </div>
   </div>
 <div class="content">

@@ -8,7 +8,6 @@
   <app-login-form  (openSubmitFormEvent)="isSubmitActive=$event" (LoginEvent)="isLoginActive=$event" *ngIf="isLoginActive"></app-login-form>
 </main>
 <router-outlet></router-outlet>
-<<<<<<< HEAD
 <ng-container *ngIf="false">
 <app-event-card (click)="redirectToEventProfile(event._id)" (mouseenter)="event.hovered = true"
                       (mouseleave)="event.hovered = false"
@@ -16,7 +15,3 @@
                       [event]="event"></app-event-card>
                     </ng-container>
 <!--<app-footer></app-footer>-->
-=======
-<!--<app-event-card (click)="redirectToEventProfile(event._id)" (mouseenter)="event.hovered = true" (mouseleave)="event.hovered = false" *ngFor="let event of events" [event]="event"></app-event-card>-->
-<!--TODO: ask Mac what the hell's going on with his suggested events-->
->>>>>>> 14e39f4977e7461ecfe5b603ddec14b21f4bf000
