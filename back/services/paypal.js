@@ -36,7 +36,7 @@ module.exports.createPayment = (req, res) => {
                     "payment_method": "paypal"
                 },
                 "redirect_urls": {
-                    "return_url": "http://52.40.161.160:3000/pay/execute",
+                    "return_url": "http://localhost:3000/pay/execute",
                     "cancel_url": "http://52.40.161.160:3000/pay/cancel"
                 },
                 "transactions": [{
