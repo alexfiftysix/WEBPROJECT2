@@ -12,13 +12,13 @@ import {Router} from "@angular/router";
 export class CreateEventComponent implements OnInit {
 
   bandId: string; //id of band organizing event
-  name: string;
-  location: string;
-  price: string;
-  venue: string;
+  name: string = '';
+  location: string = '';
+  price: string = '';
+  venue: string = '';
   banner: File = null;
-  description: string;
-  date: string;
+  description: string = '';
+  date: string = '';
   waiting: boolean = false;
 
   constructor(
@@ -50,7 +50,7 @@ export class CreateEventComponent implements OnInit {
 
     this.httpClient.post(url, body)
       .subscribe(data => {
-        console.log("Success!");
+          console.log("Success!");
           console.log(data);
           this.closeDialog();
         },
@@ -67,6 +67,27 @@ export class CreateEventComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  formValid() {
+    return this.textValid() && this.priceValid();
+  }
+
+  textValid() {
+    return this.name.length > 0 &&
+      this.location.length > 0 &&
+      this.venue.length > 0 &&
+      this.description.length > 0 &&
+      this.date.length > 0;
+  }
+
+  priceValid() {
+    let priceNum = parseFloat(this.price);
+    return !isNaN(priceNum);
+  }
+
+  dateValid() {
+    return this.date.length > 0;
   }
 
 }

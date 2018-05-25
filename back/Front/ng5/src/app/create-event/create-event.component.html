@@ -11,7 +11,7 @@
 
     <mat-form-field floatLabel>
       <mat-label>Venue</mat-label>
-      <input [(ngModel)]="venue" type="text" matInput placeholder="Where the event is held" required>
+      <input [(ngModel)]="venue" type="text" matInput placeholder="Event venue" required>
     </mat-form-field>
 
     <mat-form-field floatLabel>
@@ -21,7 +21,7 @@
 
     <mat-form-field floatLabel>
       <mat-label>Price</mat-label>
-      <input [(ngModel)]="price" type="text" matInput placeholder="Ticket price in dollars" required>
+      <input [(ngModel)]="price" type="number" matInput placeholder="Ticket price in dollars" required>
       <!--TODO: put a dollar sign in-->
     </mat-form-field>
 
@@ -32,15 +32,15 @@
     <input id="banner" type="file" name="banner" (change)="handleFileInput($event.target.files)">
 
     <mat-form-field floatLabel>
-      <mat-label>Description
-      </mat-label>
+      <mat-label>Description</mat-label>
       <textarea [(ngModel)]="description" type="text" matInput
                 placeholder="Tell us something interesting about your event" required></textarea>
     </mat-form-field>
-
   </mat-dialog-actions>
 
-  <button mat-raised-button (click)="create()">Confirm</button>
+  <p class="alert" *ngIf="!textValid()">Please enter a name, location, venue and description</p>
+  <p class="alert" *ngIf="!dateValid()">Please enter a date</p>
+  <button *ngIf="formValid()" mat-raised-button (click)="create()">Confirm</button>
 </main>
 <main *ngIf="waiting">
   <p>Event uploading, please wait...</p>

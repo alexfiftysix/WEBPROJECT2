@@ -1,14 +1,31 @@
-main{
+main {
   display: flex;
   flex-direction: column;
   min-width: 600px;
 }
 
-mat-dialog-actions{
+mat-dialog-actions {
   display: flex;
   flex-direction: column;
 }
 
-textarea{
+textarea {
   height: 200px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.alert{
+  background: orangered;
+  padding: 10px;
+  border-radius: 3px;
 }

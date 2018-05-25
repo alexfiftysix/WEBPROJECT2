@@ -27,11 +27,14 @@
 
     <label for="banner">Band Image</label>
     <input id="banner" type="file" name="banner" (change)="handleFileInput($event.target.files)" accept=".png, .jpg, .jpeg">
+    <p *ngIf="!imageUploaded()" class="alert">Please upload an image of your band, in .jpg or .png format</p>
 
     <mat-form-field floatLabel>
       <mat-label>Spotify Artist or Album url</mat-label>
       <input name="spotifyPlayerLink" [(ngModel)]="spotifyPlayerLink" matInput required placeholder="https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C">
     </mat-form-field>
+    <p *ngIf="!spotifyLinkValid()" class="alert">Please enter a valid spotify album or artist link.<br>
+      Find yours at <a href="https://open.spotify.com/">https://open.spotify.com/</a></p>
 
     <mat-form-field floatLabel>
       <mat-label>Bio</mat-label>
@@ -40,9 +43,9 @@
                 required></textarea>
     </mat-form-field>
     <div class="divider"></div>
-    <p *ngIf="!spotifyLinkValid()" class="alert">Please enter a valid spotify album or artist link. Find yours at <a href="https://open.spotify.com/">https://open.spotify.com/</a>.</p>
+
     <p *ngIf="!requiredFieldsFilled()" class="alert">Please enter your band name, and a bio for your band</p>
-    <p *ngIf="!imageUploaded()" class="alert">Please upload an image of your band, in .jpg or .png format</p>
+
     <button *ngIf="formValid()" mat-raised-button (click)="create()">Create</button>
   </form>
 </main>

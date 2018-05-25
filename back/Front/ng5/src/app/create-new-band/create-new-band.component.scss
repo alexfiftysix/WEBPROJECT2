@@ -32,7 +32,6 @@ main{
     color: $color-lighter;
   }
 
-
   footer{
     background: $color-accent;
     color: white;
@@ -40,9 +39,9 @@ main{
   }
 }
 
-.divider{
-  border-bottom: 1px solid darkslategrey;
-}
+//.divider{
+//  border-bottom: 1px solid darkslategrey;
+//}
 
 .alert{
   background: orangered;

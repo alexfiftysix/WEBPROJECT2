@@ -15,7 +15,7 @@ import { Http, Headers} from '@angular/http';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
-  isChanged = false; 
+  isChanged = false;
   title: String = 'Log In to BANDZ account';
   @Output() public openSubmitFormEvent = new EventEmitter();
   activeResetComponent = true;
@@ -72,7 +72,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   sendNewPassword(email: String) {
      // sends email
      this.http.get(
-       `http://localhost:3000/users/sendPassword/${email}`
+       `http://52.40.161.160:3000/users/sendPassword/${email}`
      )
      .map((data: any) => data.json())
      .subscribe(data => {
