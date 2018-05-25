@@ -7,7 +7,7 @@ const templates = require('../services/templates');
 //GET INDIVIDUAL USER
 
 exports.getOneUser = (req,res,next) =>{
-    const email = req.params.userEmail;
+      const email = req.params.userEmail;
     User.find({ username:email})
     .exec()
     .then(user =>{
@@ -25,6 +25,13 @@ exports.getOneUser = (req,res,next) =>{
     })
 };
 exports.sentNewPassword = (req,res,next) =>{
+    let mailOptions = {
+        from: '"Bandz administration" <maciej.czarnota@gmail.com>', // sender address
+        to:  '', // list of receivers
+        subject: 'Welcome to Bandz System', // Subject line
+        text: 'Hello world?' // plain text body
+        // html: mailtemplate.resetPasswordTemplate(newPassword) // html body
+    }
     const email = req.params.userEmail;
     User.find({ username:email})
     .exec()
@@ -52,15 +59,10 @@ exports.sentNewPassword = (req,res,next) =>{
                     .exec()
                     .then( result=>{
                         //change array to object since find method returns an array
-                        const newUser = user[0]; 
-                        let mailOptions = {
-                            from: '"Bandz administration" <maciej.czarnota@gmail.com>', // sender address
-                            to:  newUser.username, // list of receivers
-                            subject: 'Welcome to Bandz System', // Subject line
-                            text: 'Hello world?', // plain text body
-                            html: mailtemplate.resetPasswordTemplate(newUser.password) // html body
-                        }
-                        mail.generateEmail(newUser, templates.resetPasswordTemplate(newPassword));
+                        const newUser = user[0];
+                        mailOptions.to = newUser.username;
+                        mailOptions.html = templates.resetPasswordTemplate(newPassword);
+                        mail.generateEmail(mailOptions);
                             res.status(200).json({
                                 success: 'sucess',
                                 message: 'Password has been sent'

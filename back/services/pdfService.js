@@ -13,7 +13,6 @@ exports.generatePdf = (eventName, eventDate, eventAddress, eventPhoto, eventPric
     eventName = eventName,
     name =	'Ticket_' + eventName,
     date =	moment(eventDate).format('L'),
-    thumbnail = eventPhoto,
     price =	'PRICE: $' + eventPrice,
     clientName = customerName,
     eventLocalization = eventAddress
@@ -60,11 +59,6 @@ doc.fontSize(25).text( price), {
 };
 doc.moveDown(0,5);
 
-/* Embed image within the document as follows:
-   image(image to be embedded, x axis position, y axis position, fit image to specified dimensions) */
-   doc.image(thumbnail, 30, 80, {
-     width: 100
-    });
 
 /* Finalise the PDF */
 doc.end();

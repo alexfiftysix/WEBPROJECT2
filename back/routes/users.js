@@ -21,7 +21,13 @@ router.delete('/:userId', (req,res,next) => {
 });
 //Register
 router.post('/register', (req,res,next) => {
- 
+    let mailOptions = {
+        from: '"Bandz administration" <maciej.czarnota@gmail.com>', // sender address
+        to:  '', // list of receivers
+        subject: 'Welcome to Bandz System', // Subject line
+        text: 'Hello world?' // plain text body
+        // html: mailtemplate.resetPasswordTemplate(newPassword) // html body
+    }
     let newUser = new User({
         username: req.body.username,
         password: req.body.password
@@ -46,7 +52,9 @@ User.find({username:req.body.username})
             })
         } else{
             //send confirmation email
-            mail.generateEmail(newUser, templates.newUserTemplate(newUser));
+            mailOptions.to = newUser.username;
+            mailOptions.html = templates.newUserTemplate(newUser);
+            mail.generateEmail(mailOptions);
             res.json({
                 success: true,
                 message: 'User has been registered'
