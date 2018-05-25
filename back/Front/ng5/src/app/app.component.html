@@ -8,5 +8,10 @@
   <app-login-form  (openSubmitFormEvent)="isSubmitActive=$event" (LoginEvent)="isLoginActive=$event" *ngIf="isLoginActive"></app-login-form>
 </main>
 <router-outlet></router-outlet>
-
+<!--<ng-container>-->
+  <!--<app-event-card (click)="redirectToEventProfile(event._id)" (mouseenter)="event.hovered = true"-->
+                  <!--(mouseleave)="event.hovered = false"-->
+                  <!--*ngFor="let event of events"-->
+                  <!--[event]="event"></app-event-card>-->
+<!--</ng-container>-->
 <!--<app-footer></app-footer>-->

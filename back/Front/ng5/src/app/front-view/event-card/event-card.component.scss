@@ -1,7 +1,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "../../../variables.scss";
 
-p{
+p {
   display: block;
   height: 1em;
   color: black;
@@ -9,14 +9,12 @@ p{
 
 .suggestionsGallery {
   display: grid;
-  grid-template-columns: 1fr 1fr ;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   justify-items: center;
   grid-gap: 1em;
 
-
 }
-
 
 .hotItem {
   position: absolute;
@@ -36,45 +34,51 @@ p{
   // border: 1px red solid;
 }
 
- mat-card{
+mat-card {
   margin-bottom: 1em;
 }
-mat-card-content{
+
+mat-card-content {
   margin-top: 0.5em;
   line-height: 1.8;
 }
+
 .price {
   font-weight: normal;
   font-size: 1rem;
 }
-.venueName,.venueAddress{
-  display:inline-block;
+
+.venueName, .venueAddress {
+  display: inline-block;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
 .venueAddress,
-.venueName,.eventName{
+.venueName, .eventName {
   font-weight: bold;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
 }
+
 // .contents{
 //   margin-bottom:-2em !important;
 // }
 
-.Image{
+.Image {
   height: 200px;
   width: 100%;
   overflow: hidden;
   background-size: cover;
   background-repeat: no-repeat;
-  
+
   img {
     object-fit: cover;
-    
+
   }
 }
-.Image:hover{
+
+.Image:hover {
   opacity: 0.8;
 }
 

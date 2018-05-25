@@ -3,3 +3,19 @@ app-suggestions {
   margin: auto;
   padding: 0 50px 50px;
 }
+
+
+.cardBox{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+
+  *{
+    width: calc(25% - 10px);
+  }
+}
+
+app-event-card:hover{
+  cursor: pointer;
+}
