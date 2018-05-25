@@ -29,7 +29,8 @@
     <input type="date" [ngModel]="date | date:'yyyy-MM-dd'" (ngModelChange)="date = $event">
 
     <mat-label for="banner">Event Image</mat-label>
-    <input id="banner" type="file" name="banner" (change)="handleFileInput($event.target.files)">
+    <input id="banner" type="file" name="banner" (change)="handleFileInput($event.target.files)"
+           accept=".png, .jpg, .jpeg">
 
     <mat-form-field floatLabel>
       <mat-label>Description</mat-label>
@@ -40,6 +41,8 @@
 
   <p class="alert" *ngIf="!textValid()">Please enter a name, location, venue and description</p>
   <p class="alert" *ngIf="!dateValid()">Please enter a date</p>
+  <p class="alert" *ngIf="!imageValid()">Please upload an image</p>
+  <p class="alert" *ngIf="!priceValid()">Please enter a price in dollars (up to 100)</p>
   <button *ngIf="formValid()" mat-raised-button (click)="create()">Confirm</button>
 </main>
 <main *ngIf="waiting">

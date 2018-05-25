@@ -93,14 +93,15 @@ module.exports.executePayment = (req, res, next) => {
             });
             throw error;
         } else {
+            console.log(payment);
             res.status(200);
             //create PDF and attach to email
-            var filepath = path.join('./../back/pdfs/', 'Ticket_' + eventName.replace(' ', '-') + '.pdf');
+            var filepath = path.join('./pdfs/', 'Ticket_' + eventName.replace(' ', '-') + '.pdf');
             let customerName = payment.payer.payer_info.first_name + ' ' + payment.payer.payer_info.last_name;
             pdf.generatePdf(eventName, eventDate, eventLocation, eventPhoto, eventPrice, customerName);
             let mailOptions = {
                 from: '"Bandz administration" <maciej.czarnota@gmail.com>', // sender address
-                to: 'maciej.czarnota@gmail.com', // list of receivers
+                to: payment.payer.payer_info.email, // list of receivers
                 subject: 'Confirmation for ' + eventName + ' gig', // Subject line
                 text: 'Hello world?', // plain text body
                 html: mailtemplate.pdfTemplate, // html body

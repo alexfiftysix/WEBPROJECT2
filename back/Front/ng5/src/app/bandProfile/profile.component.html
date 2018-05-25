@@ -39,7 +39,7 @@
     <div class="event" *ngFor="let event of gigs">
       <div class="title">
         <h1>{{ event?.name }}</h1>
-        <h2>{{ event?.date}} | {{ event?.venueName}} | {{ event?.city}}</h2>
+        <h2>{{ event?.date}} | {{ event?.venueName}} | {{ event?.location.city}}</h2>
       </div>
       <button mat-raised-button (click)="buyTickets(event?._id)">Buy tickets {{event?.price|currency}}</button>
     </div>

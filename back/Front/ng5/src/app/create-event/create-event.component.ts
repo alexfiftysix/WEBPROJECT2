@@ -70,7 +70,10 @@ export class CreateEventComponent implements OnInit {
   }
 
   formValid() {
-    return this.textValid() && this.priceValid();
+    return this.textValid() &&
+      this.priceValid() &&
+      this.dateValid() &&
+      this.imageValid();
   }
 
   textValid() {
@@ -83,11 +86,14 @@ export class CreateEventComponent implements OnInit {
 
   priceValid() {
     let priceNum = parseFloat(this.price);
-    return !isNaN(priceNum);
+    return !isNaN(priceNum) && priceNum >= 0 && priceNum <= 100;
   }
 
   dateValid() {
     return this.date.length > 0;
   }
 
+  imageValid(){
+    return this.banner != null;
+  }
 }

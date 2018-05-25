@@ -119,7 +119,7 @@ export class ProfileComponent implements OnInit {
 
   sendPayment(eventId) {
     console.log(eventId);
-    return this.http.post('http:52.40.161.160:3000/pay/' + eventId, '')
+    return this.http.post('http://52.40.161.160:3000/pay/' + eventId, '')
       .map(res => res.json());
   }
 }
