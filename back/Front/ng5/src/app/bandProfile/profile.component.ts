@@ -140,7 +140,7 @@ export class BandProfileComponent implements OnInit {
         'Content-Type': 'application/json'
       }),
       options: any = {name: name, description: description},
-      url: any = 'http://localhost:3000/pdf/';
+      url: any = 'http://52.40.161.160:3000/pdf/';
 
     this.httpClient
       .get(url, {responseType: 'arraybuffer'})
@@ -158,7 +158,7 @@ export class BandProfileComponent implements OnInit {
 
   sendPayment(eventId) {
     console.log(eventId);
-    return this.http.post('http://localhost:3000/pay/' + eventId, '')
+    return this.http.post('http://52.40.161.160:3000/pay/' + eventId, '')
       .map(res => res.json());
   }
 

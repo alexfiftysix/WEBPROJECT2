@@ -103,7 +103,6 @@ export class CreateNewBandComponent implements OnInit {
       return false;
     }
     let musicSplit = this.spotifyPlayerLink.split('/');
-    console.log(musicSplit);
 
     if (musicSplit.length < 5) {
       return false;

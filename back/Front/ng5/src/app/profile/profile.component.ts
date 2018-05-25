@@ -9,6 +9,7 @@ import 'rxjs/add/operator/catch';
 
 import {ProfileDoesNotExistComponent} from "../profile-does-not-exist/profile-does-not-exist.component";
 import {ProfileDeleteComponent} from "../profile-delete/profile-delete.component";
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'app-profile',
@@ -39,7 +40,8 @@ export class ProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog,
     private eventService: EventsDataService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private http: Http,
   ) {
   }
 
@@ -102,5 +104,22 @@ export class ProfileComponent implements OnInit {
    */
   sanitizeImageLink(link: string) {
     return link.replace(/\\/g, '/').replace(/ /g, '%20');
+  }
+
+  buyTickets() {
+    this.sendPayment(this.id).subscribe((payment) => {
+      for (let i = 0; i < payment.links.length; i++) {
+        if (payment.links[i].rel === 'approval_url') {
+          console.log(payment.links[i].href);
+          window.location.href = payment.links[i].href;
+        }
+      }
+    });
+  }
+
+  sendPayment(eventId) {
+    console.log(eventId);
+    return this.http.post('http://52.40.161.160:3000/pay/' + eventId, '')
+      .map(res => res.json());
   }
 }
