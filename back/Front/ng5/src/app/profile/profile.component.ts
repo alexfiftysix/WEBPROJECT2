@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
   }
 
   setDataFromDB() {
-    const url = 'http://' + '52.40.161.160' + ":3000/events/" + this.id;
+    const url = 'http://' + '52.40.161.160' + ':3000/events/' + this.id;
     console.log(url);
 
     this.httpClient.get(url)
