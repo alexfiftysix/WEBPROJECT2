@@ -14,12 +14,16 @@ const bandSchema = mongoose.Schema({
     music: {type: String, required: false},
     image: {type: String, required: true}
 });
+
+const Band = module.exports = mongoose.model('Band', bandSchema);
+
+
+
 //creating an index
 // db.bands.createIndex( { "city" : 1 , "name" : 1, "genre": 1},
 //                            { collation: {
 //                                locale : 'en',
 //                                strength : 2
 //                              }
-//                            } )
+//                            } );
 // model (name of the model, data provided)
-const Band = module.exports = mongoose.model('Band', bandSchema);

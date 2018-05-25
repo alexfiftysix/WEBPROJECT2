@@ -7,10 +7,10 @@
       <form [style.border-bottom]="isActive() ? '2px solid #d1d1d1': 'none'">
         <div class="search-wrapper">
           <img src="../../../assets/images/search.svg">
-          <input (focus)="changeActive()" (blur)="changeActive()" class="text-box" title='search' type="text"
-                 placeholder={{searchContent[counter]}}>
+          <input (focus)="changeActive()" class="text-box" title='search' type="text" name="search"
+                 placeholder={{searchContent[counter]}} [(ngModel)]="searchQuery">
         </div>
-        <input class="btn" title="submit" type="submit" value="Search">
+        <input class="btn" title="submit" type="submit" value="Search" (click)="redirectToMainPage(searchQuery)">
       </form>
       <div class="additionalInformationWrapper" [style.display]="isActive() ? 'block': 'none'">
         <div class="innerWrapper">
@@ -18,9 +18,9 @@
             Explore
             <b>BANDS</b>
           </h3>
-          <button class="myButton">All</button>
-          <button class="myButton">Bands</button>
-          <button class="myButton">Events</button>
+          <button class="myButton" (click)="redirectToMainPage(searchQuery)">All</button>
+          <button class="myButton" (click)="redirectToMainPageBandsOnly(searchQuery)">Bands</button>
+          <button class="myButton" (click)="redirectToMainPageEventsOnly(searchQuery)">Events</button>
         </div>
       </div>
     </div>

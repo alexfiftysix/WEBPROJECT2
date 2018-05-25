@@ -23,6 +23,6 @@ const eventSchema = mongoose.Schema({
 //                                locale : 'en',
 //                                strength : 2
 //                              }
-//                            } )
+//                            } );
 //model (name of the model, data provided)
 const Event = module.exports = mongoose.model('Event', eventSchema);

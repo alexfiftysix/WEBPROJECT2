@@ -24,6 +24,7 @@
       <mat-label>Phone number</mat-label>
       <input [(ngModel)]="phone" name="phone" type="text" matInput placeholder="Used to send sms notifications" required>
     </mat-form-field>
+    <p *ngIf="!phoneValid()" class="alert">Please enter your phone number, used for sms notifications</p>
 
     <label for="banner">Band Image</label>
     <input id="banner" type="file" name="banner" (change)="handleFileInput($event.target.files)" accept=".png, .jpg, .jpeg">

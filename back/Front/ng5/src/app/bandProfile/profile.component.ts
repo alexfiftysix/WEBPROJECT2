@@ -76,6 +76,7 @@ export class BandProfileComponent implements OnInit {
    * Gets all events by this artist into the events array
    */
   getEvents(query: string) {
+    this.gigs = [];
     let allEvents;
     return this.eventService.getEvents(query).subscribe(data => {
         allEvents = data.events;
@@ -193,11 +194,15 @@ export class BandProfileComponent implements OnInit {
   }
 
   createEvent() {
-    this.dialog.open(CreateEventComponent, {
+    const dialogRef = this.dialog.open(CreateEventComponent, {
       data: {
         id: this.bandId
       }
     });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      this.getEvents('');
+    })
   }
 
   editText() {
@@ -215,10 +220,5 @@ export class BandProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(_ => {
       this.getBand(this.bandId);
     });
-
   }
-
-
-
-
 }

@@ -1,18 +1,12 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  Observable
-} from 'rxjs/Observable';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
-import {
-  MatDialogRef
-} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
+import {Router} from '@angular/router';
 import {
   MAT_DIALOG_DATA
 } from '@angular/material';
-import { AgmCoreModule } from '@agm/core';
+import {AgmCoreModule} from '@agm/core';
 
 @Component({
   selector: 'app-slide-show-with-search-bar',
@@ -25,10 +19,27 @@ export class SlideShowWithSearchBarComponent implements OnInit {
   timer;
   counter = 0;
   active = false;
+  searchQuery = '';
   searchContent = [
     'Try "Bands in Brisbane"', 'Try "Jazz"', 'Try "Your favorite restaurant in area"', 'Try "Events in Sydney"'
   ];
   pathsArray = ['band2.jpg', 'band1.jpg', 'band3.jpg', 'band4.jpg'];
+
+  redirectToMainPage(searchQuery) {
+    localStorage.setItem('searchQuery', searchQuery);
+    this.router.navigate(['/main']);
+  }
+
+  redirectToMainPageBandsOnly(searchQuery) {
+    alert('band!');
+    localStorage.setItem('searchQueryBand', searchQuery);
+    this.router.navigate(['/main']);
+  }
+
+  redirectToMainPageEventsOnly(searchQuery) {
+    localStorage.setItem('searchQueryEvent', searchQuery);
+    this.router.navigate(['/main']);
+  }
 
   changePhoto() {
     // Change the photo of the slideshow to the next one. Resets if it
@@ -51,7 +62,7 @@ export class SlideShowWithSearchBarComponent implements OnInit {
     return this.inputActive;
   }
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {

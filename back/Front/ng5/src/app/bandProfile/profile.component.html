@@ -38,15 +38,24 @@
   <ng-container *ngIf="showGigs">
     <div class="event" *ngFor="let event of gigs">
       <div class="title">
-        <h1>{{ event?.name }}</h1>
+        <h1><a [href]="'/#/eventDetails/' + event?._id">{{ event?.name }}</a></h1>
         <h2>{{ event?.date}} | {{ event?.venueName}} | {{ event?.location.city}}</h2>
       </div>
       <button mat-raised-button (click)="buyTickets(event?._id)">Buy tickets {{event?.price|currency}}</button>
     </div>
+
     <p *ngIf="gigs.length == 0">This band has no upcoming gigs</p>
+
+    <div class="event">
+      <div class="title">
+      </div>
+      <button class="bigRed" mat-raised-button (click)="createEvent()">Add a gig</button>
+    </div>
+
+
   </ng-container>
   <app-chat-box *ngIf=isChatBoxActive></app-chat-box>
-  <button mat-raised-button (click)="deleteProfile()">Delete Band</button>
-  <button mat-raised-button (click)="createEvent()">Create Event</button>
-  <button mat-raised-button (click)="editText()">Edit text</button>
+  <button *ngIf="!showGigs" mat-raised-button (click)="deleteProfile()">Delete Band</button>
+  <button *ngIf="!showGigs" mat-raised-button (click)="editText()">Edit text</button>
+
 </main>

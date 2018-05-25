@@ -95,6 +95,10 @@ export class CreateNewBandComponent implements OnInit {
       return false;
     }
 
+    if (!this.phoneValid()){
+      return false;
+    }
+
     return this.spotifyLinkValid();
   }
 
@@ -129,6 +133,10 @@ export class CreateNewBandComponent implements OnInit {
   imageUploaded(){
     //todo: Check file is jpg or png
     return this.banner;
+  }
+
+  phoneValid(){
+    return /^[0-9 + +]{8,15}$/.test(this.phone);
   }
 
   //todo: validate phone number
