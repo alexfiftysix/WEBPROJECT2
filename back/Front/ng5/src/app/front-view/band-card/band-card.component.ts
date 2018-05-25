@@ -1,6 +1,5 @@
-import { Component, OnInit, Injectable, Input } from '@angular/core';
+import {Component, OnInit, Injectable, Input} from '@angular/core';
 import {BandsDataService} from '../suggestions/bands.service';
-import {SuggestionsComponent} from '../suggestions/suggestions.component';
 
 @Component({
   selector: 'app-band-card',
@@ -11,7 +10,8 @@ import {SuggestionsComponent} from '../suggestions/suggestions.component';
 @Injectable()
 export class BandCardComponent implements OnInit {
   @Input() band;
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
   }

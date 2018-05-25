@@ -49,20 +49,27 @@ exports.bandsGetAll = (req, res, next) => {
 
 //CREATE A BAND
 exports.createBand = (req, res, next) => {
+    if (!req.body.name || !req.body.genre || !req.body.price || !req.body.contactNumber
+        || !req.body.city || !req.body.description || !req.body.image){
+        res.json({
+            success: false,
+            message: 'Required fields not filled'
+        });
+    }
     //Create and store the band
-    const band = new Band({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        genre: req.body.genre,
-        price: req.body.price,
-        contactNumber: req.body.contactNumber,
-        availability: req.body.availability,
-        rating: req.body.rating,
-        city: req.body.city,
-        description: req.body.description,
-        music: req.body.music,
-        image: req.file.path
-    });
+        const band = new Band({
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.name,
+            genre: req.body.genre,
+            price: req.body.price,
+            contactNumber: req.body.contactNumber,
+            availability: req.body.availability,
+            rating: req.body.rating,
+            city: req.body.city,
+            description: req.body.description,
+            music: req.body.music,
+            image: req.file.path
+        });
     //save the band to DB
     band.save().then(result => {
         console.log(result);

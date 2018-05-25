@@ -4,6 +4,7 @@ const config = require('../config/database');
 const Chat = require('../models/chat');
 const mongoose = require('mongoose');
 const chatController = require('../controllers/chat');
+const passport = require('passport');
 
 //DEFAULT CHAT
 router.post('/', passport.authenticate('jwt', {session: false}),  chatController.setupChat);

@@ -28,12 +28,12 @@ if(err){
 mongoose.connection.on('connected', ()=>{
     console.log("Connected to database " + config.database);
     
-})
+});
 //Checking if there is an error with connection to database
 //Checking for connection if it's on
 mongoose.connection.on('error', (error)=>{
     console.log("Something bad happened with database connection: " + error);
-})
+});
 
 //Redirects end point routes if starts with those words
 const pdf = require('./routes/pdf');
@@ -41,7 +41,7 @@ const users = require('./routes/users');
 const bands = require('./routes/bands');
 const places  = require('./routes/places');
 const events = require('./routes/events');
-const paypal = require('./routes/paypal')
+const paypal = require('./routes/paypal');
 const chat = require('./routes/chat');
 
 //all the requests are put to on console
@@ -78,14 +78,14 @@ app.use('/pdf', pdf);
 //Index Route
 app.get('/', (req,res)=>{
     res.send("Invalid endpoint");
- })
+ });
  
 //If passed to this line then it means the route was not handled
 app.use((req,res,next)=>{
     const error = new Error(' Route was Not found');
     error.status = 404;
     next(error);
-})
+});
 //some other errors
 app.use((error,req,res,next)=>{
     res.status(error.status || 500);
@@ -95,7 +95,7 @@ app.use((error,req,res,next)=>{
         }
     })
 
-})
+});
 
 wss.on('connection', function(ws){
     //checks if connection is alive
@@ -132,9 +132,9 @@ wss.on('connection', function(ws){
             ws.ping(null, false, true);
         });
     }, 1000);
-})
+});
 //Start Server
 server.listen(port, () => {
     console.log("Server has started on port " + port);
 })
-})
+});
