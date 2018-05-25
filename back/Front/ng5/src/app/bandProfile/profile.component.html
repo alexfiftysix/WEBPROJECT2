@@ -30,7 +30,7 @@
       <p>{{ band?.description }}</p>
     </article>
     <aside>
-      <iframe [src]="spotifyPlayerLink | safeUrl" width="300" height="380"
+      <iframe [src]="spotifyPlayerLink | safeUrl" width="300" height="420"
               frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </aside>
   </div>
@@ -49,13 +49,12 @@
     <div class="event">
       <div class="title">
       </div>
-      <button class="bigRed" mat-raised-button (click)="createEvent()">Add a gig</button>
+      <button *ngIf="authService.loggedIn()" class="bigRed" mat-raised-button (click)="createEvent()">Add a gig</button>
     </div>
-
 
   </ng-container>
   <app-chat-box *ngIf=isChatBoxActive></app-chat-box>
-  <button *ngIf="!showGigs" mat-raised-button (click)="deleteProfile()">Delete Band</button>
-  <button *ngIf="!showGigs" mat-raised-button (click)="editText()">Edit text</button>
+  <button *ngIf="!showGigs && authService.loggedIn()" mat-raised-button (click)="deleteProfile()">Delete Band</button>
+  <button *ngIf="!showGigs && authService.loggedIn()" mat-raised-button (click)="editText()">Edit text</button>
 
 </main>

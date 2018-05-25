@@ -12,6 +12,8 @@ import {ProfileDoesNotExistComponent} from '../profile-does-not-exist/profile-do
 import {ProfileDeleteComponent} from '../profile-delete/profile-delete.component';
 import {CreateEventComponent} from '../create-event/create-event.component';
 import {EditBandTextComponent} from "../edit-band-text/edit-band-text.component";
+import {LoginFormComponent} from "../login-form/login-form.component";
+import {PleaseLogInComponent} from "../please-log-in/please-log-in.component";
 
 @Component({
   selector: 'app-profile',
@@ -107,14 +109,21 @@ export class BandProfileComponent implements OnInit {
   }
 
   buyTickets(eventId) {
-    this.sendPayment(eventId).subscribe((payment) => {
-      for (let i = 0; i < payment.links.length; i++) {
-        if (payment.links[i].rel === 'approval_url') {
-          console.log(payment.links[i].href);
-          window.location.href = payment.links[i].href;
+    if (this.authService.loggedIn()) {
+      this.sendPayment(eventId).subscribe((payment) => {
+        for (let i = 0; i < payment.links.length; i++) {
+          if (payment.links[i].rel === 'approval_url') {
+            console.log(payment.links[i].href);
+            window.location.href = payment.links[i].href;
+          }
         }
-      }
-    });
+      });
+    }
+    else {
+      this.dialog.open(PleaseLogInComponent);
+    }
+
+
   }
 
   getBand(bandId) {
@@ -220,5 +229,9 @@ export class BandProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(_ => {
       this.getBand(this.bandId);
     });
+  }
+
+  testLogin() {
+    this.dialog.open(LoginFormComponent);
   }
 }

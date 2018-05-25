@@ -2,7 +2,7 @@ const express =  require('express');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const config = require('../config/database')
+const config = require('../config/database');
 
 //DEFAULT
 //get
@@ -10,7 +10,7 @@ router.get('/', (req,res,next) =>{
     res.status(200).json({
         message: 'Handling GET  requests for /places'
     })
-})
+});
 //post
 router.post('/', (req,res,next) =>{
     const place = {
@@ -19,11 +19,11 @@ router.post('/', (req,res,next) =>{
         street: req.body.street,
         contactNumber: req.body.contactNumber,
         description: req.body.description
-    }
+    };
     res.status(201).json({
         createdPlace: place
     })
-})
+});
 
 //INDIVIDUAL PLACE
 //get
@@ -39,18 +39,18 @@ router.get('/:placeId', (req,res,next) =>{
             message: 'You passed the ID'
         })
     }
-    })
+    });
 //delete
     router.delete('/:placeId', (req,res,next) =>{
         res.status(200).json({
             message: 'Updated place'
         })
-    })
+    });
 //patch
     router.patch('/:placeId', (req,res,next) =>{
         res.status(200).json({
             message: 'Place deleted'
          })
-    })
+    });
 
-module.exports = router
+module.exports = router;

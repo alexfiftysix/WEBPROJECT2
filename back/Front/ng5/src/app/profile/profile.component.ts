@@ -6,10 +6,11 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/catch';
+import {Http} from "@angular/http";
 
 import {ProfileDoesNotExistComponent} from "../profile-does-not-exist/profile-does-not-exist.component";
 import {ProfileDeleteComponent} from "../profile-delete/profile-delete.component";
-import {Http} from "@angular/http";
+import {PleaseLogInComponent} from "../please-log-in/please-log-in.component";
 
 @Component({
   selector: 'app-profile',
@@ -42,6 +43,7 @@ export class ProfileComponent implements OnInit {
     private eventService: EventsDataService,
     private httpClient: HttpClient,
     private http: Http,
+    public authService: AuthService
   ) {
   }
 
@@ -107,14 +109,18 @@ export class ProfileComponent implements OnInit {
   }
 
   buyTickets() {
-    this.sendPayment(this.id).subscribe((payment) => {
-      for (let i = 0; i < payment.links.length; i++) {
-        if (payment.links[i].rel === 'approval_url') {
-          console.log(payment.links[i].href);
-          window.location.href = payment.links[i].href;
+    if (this.authService.loggedIn()) {
+      this.sendPayment(this.id).subscribe((payment) => {
+        for (let i = 0; i < payment.links.length; i++) {
+          if (payment.links[i].rel === 'approval_url') {
+            console.log(payment.links[i].href);
+            window.location.href = payment.links[i].href;
+          }
         }
-      }
-    });
+      });
+    } else{
+      this.dialog.open(PleaseLogInComponent)
+    }
   }
 
   sendPayment(eventId) {
@@ -122,4 +128,6 @@ export class ProfileComponent implements OnInit {
     return this.http.post('http://52.40.161.160:3000/pay/' + eventId, '')
       .map(res => res.json());
   }
+
+
 }

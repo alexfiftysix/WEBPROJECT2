@@ -40,14 +40,14 @@ const upload = multer({
 //DEFAULT
 router.get('/', eventController.eventsGetAll);
 
-router.post('/', upload.single('image'), eventController.createEvent);
+router.post('/', passport.authenticate('jwt', {session: false}), upload.single('image'), eventController.createEvent);
 
 //INDIVIDUAL BAND
 
 router.get('/:EventId', eventController.getOneEvent);
 
-router.delete('/:EventId', eventController.deleteOneEvent);
+router.delete('/:EventId', passport.authenticate('jwt', {session: false}),  eventController.deleteOneEvent);
 
-router.patch('/:EventId', eventController.modifyOneEvent);
+router.patch('/:EventId', passport.authenticate('jwt', {session: false}),  eventController.modifyOneEvent);
 
 module.exports = router;

@@ -1,14 +1,14 @@
 const express =  require('express');
 const router = express.Router();
-const config = require('../config/database')
+const config = require('../config/database');
 const Chat = require('../models/chat');
 const mongoose = require('mongoose');
 const chatController = require('../controllers/chat');
 
 //DEFAULT CHAT
-router.post('/', chatController.setupChat);
+router.post('/', passport.authenticate('jwt', {session: false}),  chatController.setupChat);
 
 //GET ALL MSGS from chat
-router.get('/', chatController.getMessages);
+router.get('/', passport.authenticate('jwt', {session: false}),  chatController.getMessages);
 
-module.exports = router
+module.exports = router;

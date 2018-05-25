@@ -39,14 +39,14 @@ const upload = multer({
 
 router.get('/', bandsController.bandsGetAll);
 
-router.post('/', upload.single('bandImage'), bandsController.createBand);
+router.post('/', passport.authenticate('jwt', {session: false}),  upload.single('bandImage'), bandsController.createBand);
 
 //INDIVIDUAL BAND
 
 router.get('/:bandId',bandsController.getOneBand);
 
-router.delete('/:bandId', bandsController.deleteOneBand);
+router.delete('/:bandId', passport.authenticate('jwt', {session: false}),  bandsController.deleteOneBand);
 
-router.patch('/:bandId', bandsController.modifyOneBand);
+router.patch('/:bandId', passport.authenticate('jwt', {session: false}),  bandsController.modifyOneBand);
 
 module.exports = router;

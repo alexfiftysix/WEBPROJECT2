@@ -23,5 +23,5 @@
     </aside>
   </div>
 
-  <button mat-raised-button (click)="deleteProfile()">Delete Event</button>
+  <button *ngIf="authService.loggedIn()" mat-raised-button (click)="deleteProfile()">Delete Event</button>
 </main>

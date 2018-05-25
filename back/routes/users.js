@@ -2,14 +2,14 @@ const express =  require('express');
 const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const config = require('../config/database')
+const config = require('../config/database');
 const User = require('../models/user');
 const mail = require('../services/mailService');
 const mongoose = require('mongoose');
 const userController = require('../controllers/user');
 const templates = require('../services/templates');
 //Delete
-router.delete('/:userId', (req,res,next) => {
+router.delete('/:userId', passport.authenticate('jwt', {session: false}), (req,res,next) => {
     User.remove({_id: req.params.userId})
     .exec()
     .then(response=>{
@@ -27,7 +27,7 @@ router.post('/register', (req,res,next) => {
         subject: 'Welcome to Bandz System', // Subject line
         text: 'Hello world?' // plain text body
         // html: mailtemplate.resetPasswordTemplate(newPassword) // html body
-    }
+    };
     let newUser = new User({
         username: req.body.username,
         password: req.body.password
